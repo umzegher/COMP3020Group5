@@ -10,41 +10,41 @@
         <link rel="stylesheet" href="css/main.css">
     </head>
     <body>
-		<div id="sideBar">
-			<div id="carPicker">
-				<div class="carPickerItem">2010 Toyota Prius</div>
-				<div class="carPickerItem active">2007 Cadillac Escalade</div>
-				<div class="carPickerItem">2013 Dodge Dart</div>
-				<div class="carPickerItem">1998 Pontiac Sunfire</div>
-			</div>
-			<div id="carInfo">
-				<div id="carModel">2007 Cadillac Escalade</div>
-				
-			</div>
-		</div>
-		
-		<div id="map">
-			<div id="mapCanvas"></div>
-			
-			<div id="addFillUp" style="display: none;">
-				<h2>Add fill up</h2>
-				Amount:
-				<input type="number" value="40" min="0" max="40" required/> Litres
-				<br/>
-				Odometer:
-				<input type="number" value="158741" min="0" max="999999" required/>
-				<br/>
-				Price:
-				$ <input type="number" id="fillUpPrice" value="0" min="0" step="0.1" style="width: 70px" required/> /Litre
-				<br/>
-				<button id="doneFillUp">Done</button>
-				<button id="cancelFillUp">Cancel</button>
-				
-			</div>
-		</div>
+        <div id="sideBar">
+            <div id="carPicker">
+                <div class="carPickerItem">2010 Toyota Prius</div>
+                <div class="carPickerItem active">2007 Cadillac Escalade</div>
+                <div class="carPickerItem">2013 Dodge Dart</div>
+                <div class="carPickerItem">1998 Pontiac Sunfire</div>
+            </div>
+            <div id="carInfo">
+                <div id="carModel">2007 Cadillac Escalade</div>
+                
+            </div>
+        </div>
+        
+        <div id="map">
+            <div id="mapCanvas"></div>
+            
+            <div id="addFillUp" style="display: none;">
+                <h2>Add fill up</h2>
+                Amount:
+                <input type="number" value="40" min="0" max="40" required/> Litres
+                <br/>
+                Odometer:
+                <input type="number" value="158741" min="0" max="999999" required/>
+                <br/>
+                Price:
+                $ <input type="number" id="fillUpPrice" value="0" min="0" step="0.1" style="width: 70px" required/> /Litre
+                <br/>
+                <button id="doneFillUp">Done</button>
+                <button id="cancelFillUp">Cancel</button>
+                
+            </div>
+        </div>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.js"></script>
-		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZUAd3IJtr5Ym3vv3zpEjM2175st_5mNo&sensor=true&libraries=places"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZUAd3IJtr5Ym3vv3zpEjM2175st_5mNo&sensor=true&libraries=places"></script>
 
         <!--<script src="js/response.js"></script>-->
         <script src="js/main.js"></script>
