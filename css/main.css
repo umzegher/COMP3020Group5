@@ -23,15 +23,19 @@ body {
 	top: 35%;
 	left: 50%;
 	background: white;
-	border: solid 1px grey;
+	border: solid 1px white;
 	border-radius: 5px;
 	padding: 5px;
 }
 
 #sideBar {
+	font-family:Arial, sans-serif;
+	color: white;
 	height: 100%;
 	width: 300px;
 	float: left;
+	background-color:#32425C;
+	padding:10px;
 }
 
 #carPicker {
@@ -44,13 +48,23 @@ body {
 	padding: 10px;
 	border: 1px black solid;
 	cursor: pointer;
+	margin-bottom: 5px;
+	border-radius: 5px;
+	background-color:#282828;
 }
 .carPickerItem.active {
-	background: grey;
+	color:#282828;
+	background: #D48332;
+}
+
+.carPickerItem:hover {
+	background-color:#F6F58F;
+	color:#282828;
 }
 
 #carInfo {
 	height: 40%;
+	background-color:#282828;
 }
 #carModel {
 	font-size: 1.5em;
