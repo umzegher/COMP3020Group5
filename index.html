@@ -8,45 +8,129 @@
         <meta name="viewport" content="width=device-width">
 
         <link rel="stylesheet" href="css/main.css">
+        <link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
     </head>
     <body>
         <div id="sideBar">
             <div id="carPicker">
-                <div class="carPickerItem">2010 Toyota Prius</div>
-                <div class="carPickerItem active">2007 Cadillac Escalade</div>
-                <div class="carPickerItem">2013 Dodge Dart</div>
-                <div class="carPickerItem">1998 Pontiac Sunfire</div>
+                <div id="car1" class="carPickerItem">2010 Toyota Prius</div>
+                <div id="car2" class="carPickerItem active">2007 Cadillac Escalade</div>
+                <div id="car3" class="carPickerItem">2013 Dodge Dart</div>
+                <div id="car4" class="carPickerItem">1998 Pontiac Sunfire</div>
             </div>
-            <div id="carInfo">
+            <div id="car1Info" class="carInfo" style="display: none;">
+                <div id="carModel">2010 Toyota Prius</div>
+                <div class="digitalClockFont" style="float:left">4.7</div>
+                <div class="digitalClockFont" style="float:right">4.7</div>
+                <div class="units" style="float:left">
+                    L/100km last month
+                </div>
+                <div class="units" style="float:right">
+                    L/100km last year
+                </div>
+            </div>
+            <div id="car2Info" class="carInfo">
                 <div id="carModel">2007 Cadillac Escalade</div>
-                
+                <div class="digitalClockFont" style="float:left">17.4</div>
+                <div class="digitalClockFont" style="float:right">14.8</div>
+                <div class="units" style="float:left">
+                    L/100km last month
+                </div>
+                <div class="units" style="float:right">
+                    L/100km last year
+                </div>
+            </div>
+            <div id="car3Info" class="carInfo" style="display: none;">
+                <div id="carModel">2013 Dodge Dart</div>
+                <div class="digitalClockFont" style="float:left">6.1</div>
+                <div class="digitalClockFont" style="float:right">6.3</div>
+                <div class="units" style="float:left">
+                    L/100km last month
+                </div>
+                <div class="units" style="float:right">
+                    L/100km last year
+                </div>
+            </div>
+            <div id="car4Info" class="carInfo" style="display: none;">
+                <div id="carModel">1998 Pontiac Sunfire</div>
+                <div class="digitalClockFont" style="float:left">10.2</div>
+                <div class="digitalClockFont" style="float:right">10.1</div>
+                <div class="units" style="float:left">
+                    L/100km last month
+                </div>
+                <div class="units" style="float:right">
+                    L/100km last year
+                </div>
+            </div>
+            <div id="nextMaintenance">
+                Upcoming maintenance:
+                <br/>
+                Oil Change at 54827km for '07 Escalade
+                <br/>
+                Rotate tires on Nov 15 for '98 Sunfire
             </div>
         </div>
-        
-        <div id="map">
-            <div id="mapCanvas"></div>
-            
-            <div id="addFillUp" style="display: none;">
-                <h2>Add fill up</h2>
-                Amount:
-                <input type="number" value="40" min="0" max="40" required/> Litres
-                <br/>
-                Odometer:
-                <input type="number" value="158741" min="0" max="999999" required/>
-                <br/>
-                Price:
-                $ <input type="number" id="fillUpPrice" value="0" min="0" step="0.1" style="width: 70px" required/> /Litre
-                <br/>
-                <button id="doneFillUp">Done</button>
-                <button id="cancelFillUp">Cancel</button>
-                
+
+        <div id="mapCanvas"></div>
+        <div id="mapButtons">
+            <div id="maintenanceButton" class="mapButton" style="float:left">
+                <i class="fa fa-wrench fa-3x"></i>
+                Maintenance
             </div>
+            <div id="statisticsButton" class="mapButton" style="float:right">
+                <i class="fa fa-bar-chart-o fa-3x"></i>
+                Statistics
+            </div>
+        </div>
+
+        <div id="overlay" style="display:none"></div>
+
+        <div id="maintenanceWindow" class="window" style="display: none;">
+            <button id="addMaintenanceButton">Add</button>
+            <h2>Maintenance Recurrences</h2>
+            <div class="maintenanceList">
+                <div class="maintenanceItem">Rotate tires every 6 months</div>
+                <div class="maintenanceItem">Oil Change every 5000km</div>
+                <div class="maintenanceItem">Check battery every 12 months</div>
+            </div>
+
+            <h2>Upcoming Maintenance</h2>
+            <div class="maintenanceList">
+                <div class="maintenanceItem">Oil Change at 54827km</div>
+                <div class="maintenanceItem">Rotate tires on Dec 21</div>
+                <div class="maintenanceItem">Check battery on Mar 11</div>
+                <div class="maintenanceItem">Rotate tires on June 21</div>
+                <div class="maintenanceItem">Oil Change at 59827km</div>
+            </div>
+        </div>
+
+        <div id="addMaintenanceWindow" class="window" style="display: none;">
+            Name<input id="name" type="text"></input><br/>
+            <input type="radio" name="type" id="duration" checked></input>Duration<br/>
+            <input type="radio" name="type" id="distance">Distance</input><br/>
+            <div id="durationDiv">
+                Every<input type="number" id="months" value="1"></input>months<br/>
+                Starting on<input type="date" id="date"></input><br/>
+            </div>
+            <div id="distanceDiv" style="display: none">
+                Every<input type="number" id="km" value="5000"></input>km<br/>
+                Starting at<input type="number" id="startingKm"
+                value="45284"></input>km<br/>
+            </div>
+            <button id="doneAddMaintenanceButton">Done</button>
+            <button id="cancelAddMaintenanceButton">Cancel</button>
+        </div>
+        <div id="statisticsWindow" class="window" style="display: none;">
+            <div class="chartLabel">L/100km</div>
+            <canvas id="chart" height="450" width="600"></canvas>
         </div>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZUAd3IJtr5Ym3vv3zpEjM2175st_5mNo&sensor=true&libraries=places"></script>
 
         <!--<script src="js/response.js"></script>-->
+        <!--http://www.chartjs.org/-->
+        <script src="js/Chart.js"></script>
         <script src="js/main.js"></script>
     </body>
 </html>

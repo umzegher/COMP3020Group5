@@ -8,24 +8,45 @@ body {
     padding: 0;
 }
 
-#map {
-    height: 100%;
-}
-
 #mapCanvas {
     height: 100%;
 }
 
-#addFillUp {
+#mapButtons {
+    right: 20px;
     position: absolute;
-    width: 300px;
-    height: 200px;
-    top: 35%;
-    left: 50%;
+    top: 20px;
+    background: white;
+    width: 200px;
+}
+.mapButton {
+    width: 50%;
+    text-align: center;
+    padding: 10px 0px;
+    cursor: pointer;
+    border: 1px black solid;
+    margin: -1px;
+}
+
+.window {
+    position: absolute;
+    width: 600px;
+    height: 500px;
+    top: calc(50% - 250px);
+    left: calc(50% - 300px);
     background: white;
     border: solid 1px grey;
     border-radius: 5px;
     padding: 5px;
+    z-index: 2;
+}
+
+.chartLabel {
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    position: relative;
+    right: 285px;
+    bottom: 50px;
 }
 
 #sideBar {
@@ -35,7 +56,7 @@ body {
 }
 
 #carPicker {
-    height: 60%;
+    height: calc(100% - 250px);
     overflow-y: auto;
 }
 .carPickerItem {
@@ -49,11 +70,61 @@ body {
     background: grey;
 }
 
-#carInfo {
-    height: 40%;
+.carInfo {
+    height: 160px;
 }
 #carModel {
     font-size: 1.5em;
     font-weight: bold;
     padding: 10px;
 }
+
+#nextMaintenance {
+    height: 90px;
+    padding: 0px 5px;
+}
+
+@font-face {
+    font-family: 'DigitalClock';
+    /* font from http://www.fontspace.com/wlm-fonts/lets-go-digital */
+    src: url('../fonts/digital_clock.ttf');
+}
+.digitalClockFont {
+    font-family: 'DigitalClock';
+    font-size: 5em;
+    text-align: center;
+    width: 50%;
+}
+.units {
+    text-align: center;
+    width: 50%;
+}
+
+.maintenanceList {
+    height: 170px;
+    overflow-y: auto;
+    border: 1px black solid;
+}
+#addMaintenanceButton {
+    float: right;
+    margin: 20px;
+}
+
+#addMaintenanceWindow {
+    width: 300px;
+    height: 160px;
+    top: calc(50% - 150px);
+    left: calc(50% - 80px);
+    z-index: 4;
+}
+
+#overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: black;
+    opacity: 0.8;
+}
+
