@@ -1,19 +1,51 @@
 html {
-	height: 100%;
+    height: 100%;
 }
 
 body {
-	height: 100%;
-	margin: 0;
-	padding: 0;
-}
-
-#map {
-	height: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 #mapCanvas {
-	height: 100%;
+    height: 100%;
+}
+
+#mapButtons {
+    right: 20px;
+    position: absolute;
+    top: 20px;
+    background: white;
+    width: 200px;
+}
+.mapButton {
+    width: 50%;
+    text-align: center;
+    padding: 10px 0px;
+    cursor: pointer;
+    border: 1px black solid;
+    margin: -1px;
+    background-color: #32425C;
+    color:white;
+    border-radius: 10px
+}
+
+.mapButton:hover{
+    background-color: #AEC140;
+}
+
+.window {
+    position: absolute;
+    width: 600px;
+    height: 500px;
+    top: calc(50% - 250px);
+    left: calc(50% - 300px);
+    background: white;
+    border: solid 1px grey;
+    border-radius: 5px;
+    padding: 5px;
+    z-index: 2;
 }
 
 #addFillUp {
@@ -38,9 +70,23 @@ body {
 	padding:10px;
 }
 
+.chartLabel {
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    position: relative;
+    right: 285px;
+    bottom: 50px;
+}
+
+#sideBar {
+    height: 100%;
+    width: 300px;
+    float: left;
+}
+
 #carPicker {
-	height: 60%;
-	overflow-y: auto;
+    height: calc(100% - 250px);
+    overflow-y: auto;
 }
 .carPickerItem {
 	font-size: 1.5em;
@@ -54,20 +100,80 @@ body {
 }
 .carPickerItem.active {
 	color:#282828;
-	background: #D48332;
+	background: #DEF1E8;
 }
 
 .carPickerItem:hover {
-	background-color:#F6F58F;
+	background-color:#AEC140;
 	color:#282828;
 }
 
 #carInfo {
 	height: 40%;
 	background-color:#282828;
+    font-size: 1.5em;
+    font-weight: bold;
+    padding: 10px;
+    border: 1px black solid;
+    cursor: pointer;
 }
+
+.carInfo {
+    height: 160px;
+}
+
 #carModel {
-	font-size: 1.5em;
-	font-weight: bold;
-	padding: 10px;
+    font-size: 1.5em;
+    font-weight: bold;
+    padding: 10px;
 }
+
+#nextMaintenance {
+    height: 90px;
+    padding: 0px 5px;
+}
+
+@font-face {
+    font-family: 'DigitalClock';
+    /* font from http://www.fontspace.com/wlm-fonts/lets-go-digital */
+    src: url('../fonts/digital_clock.ttf');
+}
+.digitalClockFont {
+    font-family: 'DigitalClock';
+    font-size: 6em;
+    text-align: center;
+    width: 50%;
+}
+.units {
+    text-align: center;
+    width: 50%;
+}
+
+.maintenanceList {
+    height: 170px;
+    overflow-y: auto;
+    border: 1px black solid;
+}
+#addMaintenanceButton {
+    float: right;
+    margin: 20px;
+}
+
+#addMaintenanceWindow {
+    width: 300px;
+    height: 160px;
+    top: calc(50% - 150px);
+    left: calc(50% - 80px);
+    z-index: 4;
+}
+
+#overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: black;
+    opacity: 0.8;
+}
+
