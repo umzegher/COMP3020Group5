@@ -54,7 +54,7 @@ body {
 	height: 200px;
 	top: 35%;
 	left: 50%;
-	background: white;
+	background-color:#32425C;
 	border: solid 1px white;
 	border-radius: 5px;
 	padding: 5px;
@@ -68,6 +68,19 @@ body {
 	float: left;
 	background-color:#32425C;
 	padding:0px 10px 0px 10px;
+
+    background-image: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    color-stop(0, #32425C),
+    color-stop(1, #111111)
+);
+background-image: -o-linear-gradient(bottom, #32425C 0%, #111111 100%);
+background-image: -moz-linear-gradient(bottom, #32425C 0%, #111111 100%);
+background-image: -webkit-linear-gradient(bottom, #32425C 0%, #111111 100%);
+background-image: -ms-linear-gradient(bottom, #32425C 0%, #111111 100%);
+background-image: linear-gradient(to bottom, #32425C 0%, #111111 100%);
 }
 
 .chartLabel {
@@ -101,6 +114,11 @@ body {
 .carPickerItem:hover {
 	background-color:#A7D7E5;
 	color:#282828;
+}
+
+.fillUpHere{
+
+    padding:10px;
 }
 
 #maintenanceTitle{
@@ -154,7 +172,7 @@ body {
 
 #companyLogo{
     text-align: center;
-    color:#A7D7E5;
+    color:orange;
 }
 
 #overlay {

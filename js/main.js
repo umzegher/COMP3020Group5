@@ -40,7 +40,7 @@ function createMarker(place) {
     });
 
     google.maps.event.addListener(marker, 'click', function() {
-        infowindow.setContent(place.name + '<br/>'
+        infowindow.setContent('<div class="fillUpHere">' + place.name + '<br/>'
             + price + ' cents/L<br/>'
             + '<button onclick="fillUp(' + price + ', \'' + place.name + '\');">Fill up here</button>');
         infowindow.open(map, this);

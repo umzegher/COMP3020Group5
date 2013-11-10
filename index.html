@@ -14,20 +14,19 @@
     <body>
         <div id="sideBar">
             <div id="companyLogo">
-                <i class="fa fa-dashboard fa-3x"></i>
-                <hr>
+                <span>Fuel Economy </span><i class="fa fa-dashboard fa-2x"></i><span> Company</span>
             </div>
             <div id="carPicker">
-                <div id="car1" class="carPickerItem">2010 Toyota Prius</div>
-                <div id="car2" class="carPickerItem active">2007 Cadillac Escalade</div>
-                <div id="car3" class="carPickerItem">2013 Dodge Dart</div>
-                <div id="car4" class="carPickerItem">1998 Pontiac Sunfire</div>
+                <div id="car1" class="carPickerItem"><img src="./images/stang.jpg" width="270" height="100"></div>
+                <div id="car2" class="carPickerItem active"><img src="./images/escalade.jpg" width="270" height="100"></div>
+                <div id="car3" class="carPickerItem"><img src="./images/noimage.jpg" width="270" height="100"></div>
+                <div id="car4" class="carPickerItem"><img src="./images/sunfire.jpg" width="270" height="100"></div>
             </div>
             <div>
                 <a id="addVehicleButton" href="#">Manage vehicles</a>
+                <hr>
             </div>
             <div id="car1Info" class="carInfo" style="display: none;">
-                <hr>
                 <div id="carModel">2010 Toyota Prius</div>
                 <div class="fuelEconomy">
                     <div class="digitalClockFont">4.7</div>
@@ -39,7 +38,6 @@
                 </div>
             </div>
             <div id="car2Info" class="carInfo">
-                <hr>
                 <div id="carModel">2007 Cadillac Escalade</div>
                 <div class="fuelEconomy">
                     <div class="digitalClockFont">17.4</div>
@@ -51,7 +49,6 @@
                 </div>
             </div>
             <div id="car3Info" class="carInfo" style="display: none;">
-                <hr>
                 <div id="carModel">2013 Dodge Dart</div>
                 <div class="fuelEconomy">
                     <div class="digitalClockFont">6.1</div>
@@ -63,7 +60,6 @@
                 </div>
             </div>
             <div id="car4Info" class="carInfo" style="display: none;">
-                <hr>
                 <div id="carModel">1998 Pontiac Sunfire</div>
                 <div class="fuelEconomy">
                     <div class="digitalClockFont">10.2</div>
@@ -83,7 +79,6 @@
                 Rotate tires on Nov 15 for '98 Sunfire
             </div>
         </div>
-
         <div id="mapCanvas"></div>
         <div id="mapButtons">
             <div id="maintenanceButton" class="mapButton" style="float:left">
@@ -95,7 +90,6 @@
                 Statistics
             </div>
         </div>
-
         <div id="overlay" style="display:none"></div>
 
         <div id="maintenanceWindow" class="window" style="display: none;">
