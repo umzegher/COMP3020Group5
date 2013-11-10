@@ -38,14 +38,15 @@ body {
 .window {
     position: absolute;
     width: 600px;
-    height: 500px;
+    height: 600px;
     top: calc(50% - 250px);
     left: calc(50% - 300px);
     background: white;
-    border: solid 1px grey;
+    border: solid 1px black;
     border-radius: 5px;
-    padding: 5px;
+    padding: 10px;
     z-index: 2;
+    border-radius: 10px;
 }
 
 #addFillUp {
@@ -121,9 +122,11 @@ background-image: linear-gradient(to bottom, #32425C 0%, #111111 100%);
     padding:10px;
 }
 
-#maintenanceTitle{
+#upcomingMaintenanceTitle{
     text-align: center;
     font-size: 1.2em;
+    color:white;
+    padding-top:10px;
 }
 
 #carModel {
@@ -156,23 +159,101 @@ background-image: linear-gradient(to bottom, #32425C 0%, #111111 100%);
     height: 170px;
     overflow-y: auto;
     border: 1px black solid;
+    background-color: white;
+    border-radius: 10px;
+    font-family:Arial, sans-serif;
 }
+
 #addMaintenanceButton {
-    float: right;
-    margin: 20px;
+    border-radius: 5px 5px 5px 5px;
+    background-color: rgb(58,153,241);
+    display: block;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 56px;
+    text-align: center;
+    width: 200px;
+    color:white;
+    text-decoration: none;
+    margin: 10px auto;
+}
+
+#addMaintenanceButton:hover{
+    background-color: #A7D7E5;
+    color:#282828;
+}
+
+.maintenanceTitle{
+    text-align: center;
+    color:white;
+    font-family:Arial, sans-serif;
 }
 
 #addMaintenanceWindow {
     width: 300px;
-    height: 160px;
+    height: 200px;
     top: calc(50% - 150px);
     left: calc(50% - 80px);
     z-index: 4;
+    background-color:#32425C;
+    font-family:Arial, sans-serif;
+    color:white;
+    padding: 20px;
 }
 
 #companyLogo{
+    padding-top: 5px;
     text-align: center;
     color:orange;
+}
+
+.stationName{
+    font-family:Arial, sans-serif;
+}
+
+#doneAddMaintenanceButton{
+    border-radius: 5px 5px 5px 5px;
+    background-color: rgb(58,153,241);
+    display: inline;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 35px;
+    text-align: center;
+    width: 100px;
+    color:white;
+    text-decoration: none;
+}
+
+#addMaintenanceButtons{
+    padding-top: 15px;
+    text-align: center;
+}
+
+#cancelAddMaintenanceButton{
+    border-radius: 5px 5px 5px 5px;
+    background-color: rgb(58,153,241);
+    display: inline;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 35px;
+    text-align: center;
+    width: 100px;
+    color:white;
+    text-decoration: none;
+}
+
+#doneAddMaintenanceButton:hover{
+    background-color: #A7D7E5;
+    color:#282828;
+}
+
+#cancelAddMaintenanceButton:hover{
+    background-color: red;
+    color:#282828;
+}
+
+.fillUp{
+    padding:20px;
 }
 
 #overlay {
@@ -199,9 +280,17 @@ background-image: linear-gradient(to bottom, #32425C 0%, #111111 100%);
     margin: 10px auto;
 }
 
+#maintenanceWindow{
+    background-color:#32425C;
+}
+
 #addVehicleButton:hover{
     background-color: #A7D7E5;
     color:#282828;
+}
+
+.maintenanceItem{
+    padding: 10px;
 }
 
 .fuelEconomy{

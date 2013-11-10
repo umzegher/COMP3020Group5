@@ -17,10 +17,10 @@
                 <span>Fuel Economy </span><i class="fa fa-dashboard fa-2x"></i><span> Company</span>
             </div>
             <div id="carPicker">
-                <div id="car1" class="carPickerItem"><img src="./images/stang.jpg" width="270" height="100"></div>
-                <div id="car2" class="carPickerItem active"><img src="./images/escalade.jpg" width="270" height="100"></div>
-                <div id="car3" class="carPickerItem"><img src="./images/noimage.jpg" width="270" height="100"></div>
-                <div id="car4" class="carPickerItem"><img src="./images/sunfire.jpg" width="270" height="100"></div>
+                <div id="car1" class="carPickerItem"><img id="car1" src="./images/stang.jpg" width="270" height="100"></div>
+                <div id="car2" class="carPickerItem active"><img id="car2" src="./images/escalade.jpg" width="270" height="100"></div>
+                <!--<div id="car3" class="carPickerItem"><img id="car3" src="./images/noimage.jpg" width="270" height="100"></div>-->
+                <!--<div id="car4" class="carPickerItem"><img id="car4" src="./images/sunfire.jpg" width="270" height="100"></div>-->
             </div>
             <div>
                 <a id="addVehicleButton" href="#">Manage vehicles</a>
@@ -72,7 +72,7 @@
             </div>                 
             <hr>
             <div id="nextMaintenance">
-                <div id="maintenanceTitle">Upcoming Maintenance</div>
+                <div id="upcomingMaintenanceTitle">Upcoming Maintenance</div>
                 <br/>
                 Oil Change at 54827km for '07 Escalade
                 <br/>
@@ -94,14 +94,14 @@
 
         <div id="maintenanceWindow" class="window" style="display: none;">
             <button id="addMaintenanceButton">Add</button>
-            <h2>Maintenance Recurrences</h2>
+            <h2 class="maintenanceTitle">Maintenance Recurrences</h2>
             <div class="maintenanceList">
                 <div class="maintenanceItem">Rotate tires every 6 months</div>
                 <div class="maintenanceItem">Oil Change every 5000km</div>
                 <div class="maintenanceItem">Check battery every 12 months</div>
             </div>
 
-            <h2>Upcoming Maintenance</h2>
+            <h2 class="maintenanceTitle">Upcoming Maintenance</h2>
             <div class="maintenanceList">
                 <div class="maintenanceItem">Oil Change at 54827km</div>
                 <div class="maintenanceItem">Rotate tires on Dec 21</div>
@@ -124,8 +124,10 @@
                 Starting at<input type="number" id="startingKm"
                 value="45284"></input>km<br/>
             </div>
-            <button id="doneAddMaintenanceButton">Done</button>
-            <button id="cancelAddMaintenanceButton">Cancel</button>
+            <div id="addMaintenanceButtons">
+                <button id="doneAddMaintenanceButton">Done</button>
+                <button id="cancelAddMaintenanceButton">Cancel</button>
+            </div>
         </div>
         <div id="statisticsWindow" class="window" style="display: none;">
             <div class="chartLabel">L/100km</div>

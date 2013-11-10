@@ -63,13 +63,13 @@ function getRandomPrice() {
 }
 
 function fillUp(price, name) {
-    infowindow.setContent(name + '<br/>'
+    infowindow.setContent('<div class="fillUp">' + '<div class="stationName">' + name + '</div>'
             + price + ' cents/L<br/>'
             + 'Amount: <input type="number" value="40" min="0" max="40" required=""> Litres<br/>'
             + 'Odometer: <input type="number" value="158741" min="0" max="999999" required=""> km<br/>'
             + 'Price: $<input type="number" value="' + price + '" min="0" step="0.1" style="width: 70px" required="">/Litre<br/>'
             + '<button onclick="doneFillUp(' + price + ', \'' + name + '\');">Done</button>'
-            + '<button onclick="doneFillUp(' + price + ', \'' + name + '\');">Cancel</button>');
+            + '<button onclick="doneFillUp(' + price + ', \'' + name + '\');">Cancel</button></div>');
 }
 
 function doneFillUp(price, name) {
@@ -79,6 +79,14 @@ function doneFillUp(price, name) {
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
+
+$('#car1Month').click(function(e){
+    $('#car1Year').toggle();
+});
+
+$('#car1Year').click(function(e){
+    $('#car1Month').toggle();
+})
 
 $('.carPickerItem').click(function (e) {
     $('.carPickerItem').removeClass('active');
