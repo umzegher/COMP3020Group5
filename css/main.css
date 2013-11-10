@@ -79,7 +79,7 @@ body {
 }
 
 #carPicker {
-    height: calc(100% - 500px);
+    height: calc(100% - (233px + 350px));
     overflow-y: auto;
     margin-top: 5px;
 }
@@ -103,11 +103,13 @@ body {
 	color:#282828;
 }
 
-.carInfo {
-    height: 112px;
+#maintenanceTitle{
+    text-align: center;
+    font-size: 1.2em;
 }
 
 #carModel {
+    text-align: center;
     font-size: 1.5em;
     font-weight: bold;
     padding: 10px;
@@ -131,14 +133,7 @@ body {
 .digitalClockFont {
     font-family: 'DigitalClock';
     font-size: 6em;
-    text-align: center;
-    width: 50%;
 }
-.units {
-    text-align: center;
-    width: 50%;
-}
-
 .maintenanceList {
     height: 170px;
     overflow-y: auto;
@@ -170,5 +165,28 @@ body {
     left: 0;
     background: black;
     opacity: 0.8;
+}
+
+#addVehicleButton{
+    border-radius: 5px 5px 5px 5px;
+    background-color: rgb(58,153,241);
+    display: block;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 56px;
+    text-align: center;
+    width: 200px;
+    color:white;
+    text-decoration: none;
+    margin: 10px auto;
+}
+
+#addVehicleButton:hover{
+    background-color: #A7D7E5;
+    color:#282828;
+}
+
+.fuelEconomy{
+    text-align: center;
 }
 
