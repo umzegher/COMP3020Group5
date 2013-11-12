@@ -199,7 +199,7 @@ var ViewModel = function(vehicles) {
 
         if (newMaintenance.type() === "duration") {
             maintenance.months = newMaintenance.months();
-            maintenance.stargingMonths = newMaintenance.startingMonths();
+            maintenance.startingDate = newMaintenance.startingDate();
         } else {
             maintenance.kms = newMaintenance.kms();
             maintenance.startingKms = newMaintenance.startingKms();
