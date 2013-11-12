@@ -39,7 +39,7 @@ body {
     position: absolute;
     width: 600px;
     height: 600px;
-    top: calc(50% - 250px);
+    top: calc(50% - 300px);
     left: calc(50% - 300px);
     background: white;
     border: solid 1px black;
@@ -47,6 +47,7 @@ body {
     padding: 10px;
     z-index: 2;
     border-radius: 10px;
+    background-color:#32425C;
 }
 
 #addFillUp {
@@ -69,22 +70,27 @@ body {
 	float: left;
 	background-color:#32425C;
 	padding:0px 10px 0px 10px;
+    transition: width 0.5s;
 
     background-image: -webkit-gradient(
-    linear,
-    left top,
-    left bottom,
-    color-stop(0, #32425C),
-    color-stop(1, #111111)
-);
-background-image: -o-linear-gradient(bottom, #32425C 0%, #111111 100%);
-background-image: -moz-linear-gradient(bottom, #32425C 0%, #111111 100%);
-background-image: -webkit-linear-gradient(bottom, #32425C 0%, #111111 100%);
-background-image: -ms-linear-gradient(bottom, #32425C 0%, #111111 100%);
-background-image: linear-gradient(to bottom, #32425C 0%, #111111 100%);
+        linear,
+        left top,
+        left bottom,
+        color-stop(0, #32425C),
+        color-stop(1, #111111)
+    );
+    background-image: -o-linear-gradient(bottom, #32425C 0%, #111111 100%);
+    background-image: -moz-linear-gradient(bottom, #32425C 0%, #111111 100%);
+    background-image: -webkit-linear-gradient(bottom, #32425C 0%, #111111 100%);
+    background-image: -ms-linear-gradient(bottom, #32425C 0%, #111111 100%);
+    background-image: linear-gradient(to bottom, #32425C 0%, #111111 100%);
 }
 
-.chartLabel {
+#statisticsWindow {
+    color: white;
+}
+
+.chartYLabel {
     -webkit-transform: rotate(-90deg);
     -moz-transform: rotate(-90deg);
     position: relative;
@@ -92,8 +98,12 @@ background-image: linear-gradient(to bottom, #32425C 0%, #111111 100%);
     bottom: 50px;
 }
 
+.center {
+    text-align: center;
+}
+
 #carPicker {
-    height: calc(100% - (233px + 350px));
+    height: calc(100% - 420px);
     overflow-y: auto;
     margin-top: 5px;
 }
@@ -111,10 +121,13 @@ background-image: linear-gradient(to bottom, #32425C 0%, #111111 100%);
 	color:#282828;
 	background: #DEF1E8;
 }
-
 .carPickerItem:hover {
 	background-color:#A7D7E5;
 	color:#282828;
+}
+.carPickerItem img {
+    width: 270px;
+    height: 100px;
 }
 
 .fillUpHere{
@@ -153,7 +166,7 @@ background-image: linear-gradient(to bottom, #32425C 0%, #111111 100%);
 }
 .digitalClockFont {
     font-family: 'DigitalClock';
-    font-size: 6em;
+    font-size: 4em;
 }
 .maintenanceList {
     height: 170px;
@@ -176,6 +189,7 @@ background-image: linear-gradient(to bottom, #32425C 0%, #111111 100%);
     color:white;
     text-decoration: none;
     margin: 10px auto;
+    cursor: pointer;
 }
 
 #addMaintenanceButton:hover{
@@ -195,7 +209,6 @@ background-image: linear-gradient(to bottom, #32425C 0%, #111111 100%);
     top: calc(50% - 150px);
     left: calc(50% - 80px);
     z-index: 4;
-    background-color:#32425C;
     font-family:Arial, sans-serif;
     color:white;
     padding: 20px;
@@ -214,7 +227,6 @@ background-image: linear-gradient(to bottom, #32425C 0%, #111111 100%);
 #doneAddMaintenanceButton{
     border-radius: 5px 5px 5px 5px;
     background-color: rgb(58,153,241);
-    display: inline;
     font-size: 16px;
     font-weight: 300;
     line-height: 35px;
@@ -222,6 +234,9 @@ background-image: linear-gradient(to bottom, #32425C 0%, #111111 100%);
     width: 100px;
     color:white;
     text-decoration: none;
+    cursor: pointer;
+    float: left;
+    margin: 5px;
 }
 
 #addMaintenanceButtons{
@@ -232,7 +247,6 @@ background-image: linear-gradient(to bottom, #32425C 0%, #111111 100%);
 #cancelAddMaintenanceButton{
     border-radius: 5px 5px 5px 5px;
     background-color: rgb(58,153,241);
-    display: inline;
     font-size: 16px;
     font-weight: 300;
     line-height: 35px;
@@ -240,6 +254,9 @@ background-image: linear-gradient(to bottom, #32425C 0%, #111111 100%);
     width: 100px;
     color:white;
     text-decoration: none;
+    cursor: pointer;
+    float: left;
+    margin: 5px;
 }
 
 #doneAddMaintenanceButton:hover{
@@ -278,10 +295,7 @@ background-image: linear-gradient(to bottom, #32425C 0%, #111111 100%);
     color:white;
     text-decoration: none;
     margin: 10px auto;
-}
-
-#maintenanceWindow{
-    background-color:#32425C;
+    cursor: pointer;
 }
 
 #addVehicleButton:hover{
@@ -292,8 +306,50 @@ background-image: linear-gradient(to bottom, #32425C 0%, #111111 100%);
 .maintenanceItem{
     padding: 10px;
 }
+.maintenanceItem:nth-child(odd) {
+    background: lightgray;
+}
 
 .fuelEconomy{
     text-align: center;
+}
+
+.closeButton {
+    font-family: sans-serif;
+    font-size: 2em;
+    color: white;
+    float: right;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+#months {
+    width: 40px;
+}
+
+.kms {
+    width: 100px;
+}
+
+#menuButton {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    #menuButton {
+        display: inline-block;
+    }
+
+    #sideBar.hidden {
+        width: 0px;
+        padding: 0px;
+    }
+}
+
+#menuButton {
+    position: absolute;
+    z-index: 1;
+    padding: 20px;
+    cursor: pointer;
 }
 

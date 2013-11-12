@@ -5,71 +5,37 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title></title>
         <meta name="description" content="">
-        <meta name="viewport" content="width=device-width">
+        <meta name="viewport" content="user-scalable=no,width=device-width">
 
         <link rel="stylesheet" href="css/main.css">
         <link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
     </head>
     <body>
-        <div id="sideBar">
+        <div id="sideBar" class="hidden">
             <div id="companyLogo">
                 <span>Fuel Economy </span><i class="fa fa-dashboard fa-2x"></i><span> Company</span>
             </div>
-            <div id="carPicker">
-                <div id="car1" class="carPickerItem"><img id="car1" src="./images/stang.jpg" width="270" height="100"></div>
-                <div id="car2" class="carPickerItem active"><img id="car2" src="./images/escalade.jpg" width="270" height="100"></div>
-                <!--<div id="car3" class="carPickerItem"><img id="car3" src="./images/noimage.jpg" width="270" height="100"></div>-->
-                <!--<div id="car4" class="carPickerItem"><img id="car4" src="./images/sunfire.jpg" width="270" height="100"></div>-->
+            <div id="carPicker" data-bind="foreach: vehicles">
+                <div class="carPickerItem" data-bind="css: {active: $root.selectedVehicle()==$index()}, click: $root.setVehicle($index())">
+                    <img data-bind="attr: {src: 'images/'+photo}">
+                </div>
             </div>
             <div>
-                <a id="addVehicleButton" href="#">Manage vehicles</a>
+                <div id="addVehicleButton">Add vehicle</div>
                 <hr>
             </div>
-            <div id="car1Info" class="carInfo" style="display: none;">
-                <div id="carModel">2010 Toyota Prius</div>
-                <div class="fuelEconomy">
-                    <div class="digitalClockFont">4.7</div>
+            <div class="carInfo" data-bind="with: vehicles()[selectedVehicle()]">
+                <div id="carModel" data-bind="text: year+' '+make+' '+model"></div>
+                <div class="fuelEconomy" style="float: left;">
+                    <div class="digitalClockFont" data-bind="text: l100kmMonth"></div>
                     <span class="units">L/100km last month</span>
                 </div>
                 <div class="fuelEconomy">
-                    <div class="digitalClockFont">4.7</div>
+                    <div class="digitalClockFont" data-bind="text: l100kmYear"></div>
                     <span class="units">L/100km last year</span>
                 </div>
             </div>
-            <div id="car2Info" class="carInfo">
-                <div id="carModel">2007 Cadillac Escalade</div>
-                <div class="fuelEconomy">
-                    <div class="digitalClockFont">17.4</div>
-                    <span class="units">L/100km last month</span>
-                </div>
-                <div class="fuelEconomy">
-                    <div class="digitalClockFont">14.8</div>
-                    <span class="units">L/100km last year</span>
-                </div>
-            </div>
-            <div id="car3Info" class="carInfo" style="display: none;">
-                <div id="carModel">2013 Dodge Dart</div>
-                <div class="fuelEconomy">
-                    <div class="digitalClockFont">6.1</div>
-                    <span class="units">L/100km last month</span>
-                </div>
-                <div class="fuelEconomy">
-                    <div class="digitalClockFont">6.3</div>
-                    <span class="units">L/100km last year</span>
-                </div>
-            </div>
-            <div id="car4Info" class="carInfo" style="display: none;">
-                <div id="carModel">1998 Pontiac Sunfire</div>
-                <div class="fuelEconomy">
-                    <div class="digitalClockFont">10.2</div>
-                    <span class="units">L/100km last month</span>
-                </div>
-                <div class="fuelEconomy">
-                    <div class="digitalClockFont">10.1</div>
-                    <span class="units">L/100km last year</span>
-                </div>
-            </div>                 
             <hr>
             <div id="nextMaintenance">
                 <div id="upcomingMaintenanceTitle">Upcoming Maintenance</div>
@@ -79,6 +45,7 @@
                 Rotate tires on Nov 15 for '98 Sunfire
             </div>
         </div>
+        <i id="menuButton" class="fa fa-bars fa-2x"></i>
         <div id="mapCanvas"></div>
         <div id="mapButtons">
             <div id="maintenanceButton" class="mapButton" style="float:left">
@@ -93,51 +60,54 @@
         <div id="overlay" style="display:none"></div>
 
         <div id="maintenanceWindow" class="window" style="display: none;">
-            <button id="addMaintenanceButton">Add</button>
+            <div class="closeButton">X</div>
+            <div id="addMaintenanceButton">Add</div>
             <h2 class="maintenanceTitle">Maintenance Recurrences</h2>
-            <div class="maintenanceList">
-                <div class="maintenanceItem">Rotate tires every 6 months</div>
-                <div class="maintenanceItem">Oil Change every 5000km</div>
-                <div class="maintenanceItem">Check battery every 12 months</div>
+            <div class="maintenanceList" data-bind="foreach: vehicles()[selectedVehicle()].maintenance">
+                <div class="maintenanceItem" data-bind="text: $root.getMaintenanceDescription($data)"></div>
             </div>
 
             <h2 class="maintenanceTitle">Upcoming Maintenance</h2>
-            <div class="maintenanceList">
-                <div class="maintenanceItem">Oil Change at 54827km</div>
-                <div class="maintenanceItem">Rotate tires on Dec 21</div>
-                <div class="maintenanceItem">Check battery on Mar 11</div>
-                <div class="maintenanceItem">Rotate tires on June 21</div>
-                <div class="maintenanceItem">Oil Change at 59827km</div>
+            <div class="maintenanceList" data-bind="foreach: vehicles()[selectedVehicle()].upcomingMaintenance">
+                <div class="maintenanceItem" data-bind="text: $data"></div>
             </div>
         </div>
 
-        <div id="addMaintenanceWindow" class="window" style="display: none;">
-            Name<input id="name" type="text"></input><br/>
-            <input type="radio" name="type" id="duration" checked></input>Duration<br/>
-            <input type="radio" name="type" id="distance">Distance</input><br/>
-            <div id="durationDiv">
-                Every<input type="number" id="months" value="1"></input>months<br/>
-                Starting on<input type="date" id="date"></input><br/>
+        <div id="addMaintenanceWindow" class="window" style="display: none;" data-bind="with: newMaintenance">
+            <div class="closeButton">X</div>
+            Name<input id="name" type="text" data-bind="value: name"></input><br/>
+            
+            <input type="radio" name="type" id="duration" value="duration" data-bind="checked: type"></input>
+            <label for="duration">Duration</label><br/>
+            <input type="radio" name="type" id="distance" value="distance" data-bind="checked: type"></input>
+            <label for="distance">Distance</label><br/>
+
+            <div data-bind="visible: type() === 'duration'">
+                Every<input type="number" id="months" data-bind="value: months"></input>months<br/>
+                Starting on<input type="date" data-bind="value: startingDate"></input><br/>
             </div>
-            <div id="distanceDiv" style="display: none">
-                Every<input type="number" id="km" value="5000"></input>km<br/>
-                Starting at<input type="number" id="startingKm"
-                value="45284"></input>km<br/>
+            <div data-bind="visible: type() === 'distance'">
+                Every<input type="number" class="kms" data-bind="value: kms"></input>km<br/>
+                Starting at<input type="number" class="kms" data-bind="value: startingKms"></input>km<br/>
             </div>
+
             <div id="addMaintenanceButtons">
-                <button id="doneAddMaintenanceButton">Done</button>
-                <button id="cancelAddMaintenanceButton">Cancel</button>
+                <div id="doneAddMaintenanceButton" data-bind="click: $root.addMaintenance">Done</div>
+                <div id="cancelAddMaintenanceButton" data-bind="click: $root.clearAddMaintenance">Cancel</div>
             </div>
         </div>
         <div id="statisticsWindow" class="window" style="display: none;">
-            <div class="chartLabel">L/100km</div>
+            <div class="closeButton">X</div>
+            <h1 class="center">Statistics</h1>
+            <div class="chartYLabel">L/100km</div>
             <canvas id="chart" height="450" width="600"></canvas>
+            <div  class="center">Month</div>
         </div>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZUAd3IJtr5Ym3vv3zpEjM2175st_5mNo&sensor=true&libraries=places"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/2.3.0/knockout-min.js"></script>
 
-        <!--<script src="js/response.js"></script>-->
         <!--http://www.chartjs.org/-->
         <script src="js/Chart.js"></script>
         <script src="js/main.js"></script>

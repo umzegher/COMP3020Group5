@@ -1,0 +1,130 @@
+[
+    {
+        "make": "Ford",
+        "model": "Mustang",
+        "year": 1973,
+        "photo": "stang.jpg",
+        "maintenance": [
+            {
+                "name": "Rotate tires",
+                "months": 6,
+                "startingDate": "2010-02-18"
+            },
+            {
+                "name": "Oil change",
+                "kms": 5000,
+                "startingKms": 29015
+            },
+            {
+                "name": "Check battery",
+                "months": 12,
+                "startingDate": "2012-07-25"
+            }
+        ],
+        "upcomingMaintenance": [
+            "Oil Change at 54827km",
+            "Rotate tires on Dec 21",
+            "Check battery on Mar 11",
+            "Rotate tires on June 21",
+            "Oil Change at 59827km"
+        ],
+        "l100kmMonth": 18.9,
+        "l100kmYear": 19.0
+    },
+    {
+        "make": "Cadillac",
+        "model": "Escalade",
+        "year": 2007,
+        "photo": "escalade.jpg",
+        "maintenance": [
+            {
+                "name": "Rotate tires",
+                "months": 6,
+                "startingDate": "2010-02-18"
+            },
+            {
+                "name": "Oil change",
+                "kms": 5000,
+                "startingKms": 29015
+            },
+            {
+                "name": "Check battery",
+                "months": 12,
+                "startingDate": "2012-07-25"
+            }
+        ],
+        "upcomingMaintenance": [
+            "Oil Change at 54827km",
+            "Rotate tires on Dec 21",
+            "Check battery on Mar 11",
+            "Rotate tires on June 21",
+            "Oil Change at 59827km"
+        ],
+        "l100kmMonth": 17.4,
+        "l100kmYear": 14.8 
+    },
+    {
+        "make": "Dodge",
+        "model": "Dart",
+        "year": 2013,
+        "photo": "dart.png",
+        "maintenance": [
+            {
+                "name": "Rotate tires",
+                "months": 6,
+                "startingDate": "2010-02-18"
+            },
+            {
+                "name": "Oil change",
+                "kms": 5000,
+                "startingKms": 29015
+            },
+            {
+                "name": "Check battery",
+                "months": 12,
+                "startingDate": "2012-07-25"
+            }
+        ],
+        "upcomingMaintenance": [
+            "Oil Change at 54827km",
+            "Rotate tires on Dec 21",
+            "Check battery on Mar 11",
+            "Rotate tires on June 21",
+            "Oil Change at 59827km"
+        ],
+        "l100kmMonth": 6.1,
+        "l100kmYear": 6.3
+    },
+    {
+        "make": "Pontiac",
+        "model": "Sunfire",
+        "year": 1998,
+        "photo": "sunfire.jpg",
+        "maintenance": [
+            {
+                "name": "Rotate tires",
+                "months": 6,
+                "startingDate": "2010-02-18"
+            },
+            {
+                "name": "Oil change",
+                "kms": 5000,
+                "startingKms": 29015
+            },
+            {
+                "name": "Check battery",
+                "months": 12,
+                "startingDate": "2012-07-25"
+            }
+        ],
+        "upcomingMaintenance": [
+            "Oil Change at 54827km",
+            "Rotate tires on Dec 21",
+            "Check battery on Mar 11",
+            "Rotate tires on June 21",
+            "Oil Change at 59827km"
+        ],
+        "l100kmMonth": 10.2,
+        "l100kmYear": 10.1
+    }
+]

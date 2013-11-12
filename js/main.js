@@ -8,7 +8,7 @@ function initialize() {
         center: startLocation,
         zoom: 13,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
-        mapTypeControl: false
+        disableDefaultUI: true
     };
     map = new google.maps.Map(document.getElementById("mapCanvas"), mapOptions);
 
@@ -80,22 +80,6 @@ function doneFillUp(price, name) {
 
 google.maps.event.addDomListener(window, 'load', initialize);
 
-$('#car1Month').click(function(e){
-    $('#car1Year').toggle();
-});
-
-$('#car1Year').click(function(e){
-    $('#car1Month').toggle();
-})
-
-$('.carPickerItem').click(function (e) {
-    $('.carPickerItem').removeClass('active');
-    $(e.target).addClass('active');
-
-    $('.carInfo').hide();
-    $('#' + $(e.target).attr('id') + 'Info').show();
-});
-
 $('#maintenanceButton').click(function () {
     $('#maintenanceWindow').toggle();
     $('#statisticsWindow').hide();
@@ -111,16 +95,6 @@ $('#statisticsButton').click(function () {
 $('#addMaintenanceButton').click(function () {
     $('#addMaintenanceWindow').show();
     $('#overlay').css('z-index', 3);
-});
-
-$('#duration').click(function () {
-    $('#durationDiv').show();
-    $('#distanceDiv').hide();
-});
-
-$('#distance').click(function () {
-    $('#distanceDiv').show();
-    $('#durationDiv').hide();
 });
 
 $('#doneAddMaintenanceButton').click(function () {
@@ -141,6 +115,25 @@ $('#overlay').click(function () {
     $('#overlay').css('z-index', 1);
 });
 
+$('#maintenanceWindow .closeButton').click(function () {
+    $('#maintenanceWindow').hide();
+    $('#overlay').hide();
+});
+
+$('#addMaintenanceWindow .closeButton').click(function () {
+    $('#addMaintenanceWindow').hide();
+    $('#overlay').css('z-index', 1);
+});
+
+$('#statisticsWindow .closeButton').click(function () {
+    $('#statisticsWindow').hide();
+    $('#overlay').hide();
+});
+
+$('#menuButton').click(function () {
+    $('#sideBar').toggleClass('hidden');
+});
+
 new Chart(document.getElementById("chart").getContext("2d")).Line({
     labels : ["November","December","January","February","March","April","May","June","July","August","September","October"],
     datasets: [
@@ -152,4 +145,83 @@ new Chart(document.getElementById("chart").getContext("2d")).Line({
             data: [14.5,14.8,14.7,14.5,14.9,15,14.8,15.5,15.8,16,16.3,17.4]
         }
     ]
+}, {
+    scaleFontColor: "#fff",
+    scaleLineColor: "rgba(255,255,255,.2)",
+    scaleGridLineColor: "rgba(255,255,255,.1)"
 });
+
+var ViewModel = function(vehicles) {
+    var self = this;
+
+    self.vehicles = ko.observableArray(ko.utils.arrayMap(vehicles, function(vehicle) {
+        return {
+            make: vehicle.make,
+            model: vehicle.model,
+            year: vehicle.year,
+            photo: vehicle.photo,
+            maintenance: ko.observableArray(vehicle.maintenance),
+            upcomingMaintenance: vehicle.upcomingMaintenance,
+            l100kmMonth: vehicle.l100kmMonth,
+            l100kmYear: vehicle.l100kmYear
+        };
+    }));
+    self.selectedVehicle = ko.observable(1);
+    self.newMaintenance = ko.observable({
+        name: ko.observable(""),
+        type: ko.observable("duration"),
+        months: ko.observable(""),
+        startingDate: ko.observable(""),
+        kms: ko.observable(""),
+        startingKms: ko.observable("")
+    });
+
+    self.setVehicle = function(vehicle) {
+        return function() {
+            self.selectedVehicle(vehicle);
+        }
+    }
+    self.getMaintenanceDescription = function(maintenance) {
+        var description = maintenance.name + " every ";
+
+        if (maintenance.months !== undefined)
+            description += maintenance.months + " months";
+        else
+            description += maintenance.kms + " km";
+
+        return description;
+    }
+    self.addMaintenance = function() {
+        var newMaintenance = self.newMaintenance();
+        var maintenance = {
+            name: newMaintenance.name()
+        }; 
+
+        if (newMaintenance.type() === "duration") {
+            maintenance.months = newMaintenance.months();
+            maintenance.stargingMonths = newMaintenance.startingMonths();
+        } else {
+            maintenance.kms = newMaintenance.kms();
+            maintenance.startingKms = newMaintenance.startingKms();
+        }
+
+        self.vehicles()[self.selectedVehicle()].maintenance.push(maintenance);
+        self.clearAddMaintenance();
+    };
+    self.clearAddMaintenance = function() {
+        var newMaintenance = self.newMaintenance();
+
+        newMaintenance.name("");
+        newMaintenance.type("duration");
+        newMaintenance.months("");
+        newMaintenance.startingDate("");
+        newMaintenance.kms("");
+        newMaintenance.startingKms("");
+    };
+
+};
+
+$.getJSON("defaults.json", function(defaults) {
+    ko.applyBindings(new ViewModel(defaults));
+});
+
