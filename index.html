@@ -96,6 +96,7 @@
                 <div id="cancelAddMaintenanceButton" data-bind="click: $root.clearAddMaintenance">Cancel</div>
             </div>
         </div>
+
         <div id="statisticsWindow" class="window" style="display: none;">
             <div class="closeButton">X</div>
             <h1 class="center">Statistics</h1>
@@ -103,6 +104,19 @@
             <canvas id="chart" height="450" width="600"></canvas>
             <div  class="center">Month</div>
         </div>
+
+        <div id="addVehicleWindow" class="window" style="display: none;" data-bind="with: newVehicle">
+            <div class="closeButton">X</div>
+            Make<input type="text" id="make" data-bind="value: make"></input><br/>
+            Model<input type="text" id="model" data-bind="value: model"></input><br/>
+            Year<input type="number" id="year" data-bind="value: year"></input><br/>
+
+            <div id="addVehicleButtons">
+                <div id="doneAddVehicleButton" data-bind="click: $root.addVehicle">Done</div>
+                <div id="cancelAddVehicleButton" data-bind="click: $root.clearAddVehicle">Cancel</div>
+            </div>
+        </div>
+
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZUAd3IJtr5Ym3vv3zpEjM2175st_5mNo&sensor=true&libraries=places"></script>

@@ -81,14 +81,17 @@ function doneFillUp(price, name) {
 google.maps.event.addDomListener(window, 'load', initialize);
 
 $('#maintenanceButton').click(function () {
-    $('#maintenanceWindow').toggle();
-    $('#statisticsWindow').hide();
+    $('#maintenanceWindow').show();
     $('#overlay').show();
 });
 
 $('#statisticsButton').click(function () {
-    $('#statisticsWindow').toggle();
-    $('#maintenanceWindow').hide();
+    $('#statisticsWindow').show();
+    $('#overlay').show();
+});
+
+$('#addVehicleButton').click(function () {
+    $('#addVehicleWindow').show();
     $('#overlay').show();
 });
 
@@ -107,10 +110,21 @@ $('#cancelAddMaintenanceButton').click(function () {
     $('#overlay').css('z-index', 1);
 });
 
+$('#doneAddVehicleButton').click(function () {
+    $('#addVehicleWindow').hide();
+    $('#overlay').hide();
+});
+
+$('#cancelAddVehicleButton').click(function () {
+    $('#addVehicleWindow').hide();
+    $('#overlay').hide();
+});
+
 $('#overlay').click(function () {
     $('#maintenanceWindow').hide();
     $('#addMaintenanceWindow').hide();
     $('#statisticsWindow').hide();
+    $('#addVehicleWindow').hide();
     $('#overlay').hide();
     $('#overlay').css('z-index', 1);
 });
@@ -127,6 +141,11 @@ $('#addMaintenanceWindow .closeButton').click(function () {
 
 $('#statisticsWindow .closeButton').click(function () {
     $('#statisticsWindow').hide();
+    $('#overlay').hide();
+});
+
+$('#addVehicleWindow .closeButton').click(function () {
+    $('#addVehicleWindow').hide();
     $('#overlay').hide();
 });
 
@@ -175,6 +194,11 @@ var ViewModel = function(vehicles) {
         kms: ko.observable(""),
         startingKms: ko.observable("")
     });
+    self.newVehicle = ko.observable({
+        make: ko.observable(""),
+        model: ko.observable(""),
+        year: ko.observable(2013)
+    });
 
     self.setVehicle = function(vehicle) {
         return function() {
@@ -219,6 +243,29 @@ var ViewModel = function(vehicles) {
         newMaintenance.startingKms("");
     };
 
+    self.addVehicle = function() {
+        var newVehicle = self.newVehicle();
+        var vehicle = {
+            make: newVehicle.make(),
+            model: newVehicle.model(),
+            year: newVehicle.year(),
+            photo: "noimage.jpg",
+            maintenance: ko.observableArray([]),
+            upcomingMaintenance: [],
+            l100kmMonth: 0,
+            l100kmYear: 0
+        };
+
+        self.vehicles.push(vehicle);
+        self.clearAddVehicle();
+    };
+    self.clearAddVehicle = function() {
+        var newVehicle = self.newVehicle();
+
+        newVehicle.make("");
+        newVehicle.model("");
+        newVehicle.year(2013);
+    };
 };
 
 $.getJSON("defaults.json", function(defaults) {

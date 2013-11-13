@@ -206,8 +206,19 @@ body {
 #addMaintenanceWindow {
     width: 300px;
     height: 200px;
-    top: calc(50% - 150px);
-    left: calc(50% - 80px);
+    left: calc(50% - 150px);
+    top: calc(50% - 100px);
+    z-index: 4;
+    font-family:Arial, sans-serif;
+    color:white;
+    padding: 20px;
+}
+
+#addVehicleWindow {
+    width: 300px;
+    height: 160px;
+    left: calc(50% - 150px);
+    top: calc(50% - 80px);
     z-index: 4;
     font-family:Arial, sans-serif;
     color:white;
@@ -265,6 +276,51 @@ body {
 }
 
 #cancelAddMaintenanceButton:hover{
+    background-color: red;
+    color:#282828;
+}
+
+#doneAddVehicleButton{
+    border-radius: 5px 5px 5px 5px;
+    background-color: rgb(58,153,241);
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 35px;
+    text-align: center;
+    width: 100px;
+    color:white;
+    text-decoration: none;
+    cursor: pointer;
+    float: left;
+    margin: 5px;
+}
+
+#addVehicleButtons{
+    padding-top: 15px;
+    text-align: center;
+}
+
+#cancelAddVehicleButton{
+    border-radius: 5px 5px 5px 5px;
+    background-color: rgb(58,153,241);
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 35px;
+    text-align: center;
+    width: 100px;
+    color:white;
+    text-decoration: none;
+    cursor: pointer;
+    float: left;
+    margin: 5px;
+}
+
+#doneAddVehicleButton:hover{
+    background-color: #A7D7E5;
+    color:#282828;
+}
+
+#cancelAddVehicleButton:hover{
     background-color: red;
     color:#282828;
 }
