@@ -6,6 +6,7 @@ body {
     height: 100%;
     margin: 0;
     padding: 0;
+    overflow: hidden;
 }
 
 #mapCanvas {
@@ -20,7 +21,7 @@ body {
 }
 .mapButton {
     position: relative;
-    width: 48%;
+    width: 47%;
     text-align: center;
     padding: 10px 0px;
     cursor: pointer;
@@ -38,7 +39,7 @@ body {
 .window {
     position: absolute;
     width: 600px;
-    height: 600px;
+    height: auto;
     top: calc(50% - 300px);
     left: calc(50% - 300px);
     background: white;
@@ -70,7 +71,7 @@ body {
 	float: left;
 	background-color:#32425C;
 	padding:0px 10px 0px 10px;
-    transition: width 0.5s;
+    transition: left 0.5s;
 
     background-image: -webkit-gradient(
         linear,
@@ -89,7 +90,10 @@ body {
 #statisticsWindow {
     color: white;
 }
-
+#chart {
+    width: 100% !important;
+    height: auto !important;
+}
 .chartYLabel {
     -webkit-transform: rotate(-90deg);
     -moz-transform: rotate(-90deg);
@@ -103,8 +107,9 @@ body {
 }
 
 #carPicker {
-    height: calc(100% - 420px);
+    height: calc(100% - 340px);
     overflow-y: auto;
+    overflow-x: hidden;
     margin-top: 5px;
 }
 .carPickerItem {
@@ -157,6 +162,10 @@ body {
 #nextMaintenance {
     height: 90px;
     padding: 0px 5px;
+}
+#nextMaintenance ul {
+    padding-left: 15px;
+    font-size: 0.9em;
 }
 
 @font-face {
@@ -389,6 +398,10 @@ body {
 
 #menuButton {
     display: none;
+    position: absolute;
+    z-index: 1;
+    padding: 10px 15px;
+    cursor: pointer;
 }
 
 @media (max-width: 768px) {
@@ -396,16 +409,31 @@ body {
         display: inline-block;
     }
 
-    #sideBar.hidden {
-        width: 0px;
-        padding: 0px;
+    #sideBar {
+        position: fixed;
+        z-index: 1;
     }
-}
+    #sideBar.hidden {
+        left: -320px;
+    }
 
-#menuButton {
-    position: absolute;
-    z-index: 1;
-    padding: 20px;
-    cursor: pointer;
+    #mapButtons .buttonText {
+        display: none;
+    }
+    
+    #mapButtons i {
+        font-size: 2em;
+    }
+
+    #mapButtons {
+        width: 120px;
+    }
+
+    .window {
+        position: fixed;
+        left: 10px;
+        right: 10px;
+        width: auto;
+    }
 }
 

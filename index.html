@@ -15,15 +15,16 @@
             <div id="companyLogo">
                 <span>Fuel Economy </span><i class="fa fa-dashboard fa-2x"></i><span> Company</span>
             </div>
-            <div id="carPicker" data-bind="foreach: vehicles">
+            <div id="carPicker">
+                <!-- ko foreach: vehicles -->
                 <div class="carPickerItem" data-bind="css: {active: $root.selectedVehicle()==$index()}, click: $root.setVehicle($index())">
                     <img data-bind="attr: {src: 'images/'+photo}">
                 </div>
-            </div>
-            <div>
+                <!-- /ko -->
+
                 <div id="addVehicleButton">Add vehicle</div>
-                <hr>
             </div>
+            <hr/>
             <div class="carInfo" data-bind="with: vehicles()[selectedVehicle()]">
                 <div id="carModel" data-bind="text: year+' '+make+' '+model"></div>
                 <div class="fuelEconomy" style="float: left;">
@@ -35,15 +36,14 @@
                     <span class="units">L/100km last year</span>
                 </div>
             </div>
-            <hr>
+            <hr/>
             <div id="nextMaintenance">
                 <div id="upcomingMaintenanceTitle">Upcoming Maintenance</div>
-                <br/>
-                Oil Change at 54827km for '07 Escalade
-                <br/>
-                Rotate tires on Mar 25 for '98 Sunfire
-                <br/>
-                Oil Change at 2589km for '13 Dodge Dart
+                <ul>
+                    <li>Oil Change at 54827km for '07 Escalade</li>
+                    <li>Rotate tires on Mar 25 for '98 Sunfire</li>
+                    <li>Oil Change at 2589km for '13 Dodge Dart</li>
+                </ul>
             </div>
         </div>
         <i id="menuButton" class="fa fa-bars fa-2x"></i>
@@ -51,11 +51,11 @@
         <div id="mapButtons">
             <div id="maintenanceButton" class="mapButton" style="float:left">
                 <i class="fa fa-wrench fa-3x"></i>
-                Maintenance
+                <span class="buttonText">Maintenance</span>
             </div>
             <div id="statisticsButton" class="mapButton" style="float:right">
                 <i class="fa fa-bar-chart-o fa-3x"></i>
-                Statistics
+                <span class="buttonText">Statistics</span>
             </div>
         </div>
         <div id="overlay" style="display:none"></div>
