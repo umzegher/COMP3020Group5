@@ -33,6 +33,7 @@ function callback(results, status) {
 function createMarker(place) {
     var placeLoc = place.geometry.location;
     var price = getRandomPrice();
+    var name = $('<div/>').text(place.name).html();
     var marker = new google.maps.Marker({
         map: map,
         position: place.geometry.location,
@@ -40,9 +41,9 @@ function createMarker(place) {
     });
 
     google.maps.event.addListener(marker, 'click', function() {
-        infowindow.setContent('<div class="fillUpHere">' + place.name + '<br/>'
+        infowindow.setContent('<div class="fillUpHere">' + name + '<br/>'
             + price + ' cents/L<br/>'
-            + '<button onclick="fillUp(' + price + ', \'' + place.name + '\');">Fill up here</button>');
+            + '<button onclick="fillUp(' + price + ', \'' + name.replace("'", "\\'") + '\');">Fill up here</button>');
         infowindow.open(map, this);
     });
 }
@@ -68,14 +69,14 @@ function fillUp(price, name) {
             + 'Amount: <input type="number" value="40" min="0" max="40" required=""> Litres<br/>'
             + 'Odometer: <input type="number" value="158741" min="0" max="999999" required=""> km<br/>'
             + 'Price: $<input type="number" value="' + price + '" min="0" step="0.1" style="width: 70px" required="">/Litre<br/>'
-            + '<button onclick="doneFillUp(' + price + ', \'' + name + '\');">Done</button>'
-            + '<button onclick="doneFillUp(' + price + ', \'' + name + '\');">Cancel</button></div>');
+            + '<button onclick="doneFillUp(' + price + ', \'' + name.replace("'", "\\'")  + '\');">Done</button>'
+            + '<button onclick="doneFillUp(' + price + ', \'' + name.replace("'", "\\'")  + '\');">Cancel</button></div>');
 }
 
 function doneFillUp(price, name) {
     infowindow.setContent(name + '<br/>'
             + price + ' cents/L<br/>'
-            + '<button onclick="fillUp(' + price + ', \'' + name + '\');">Fill up here</button>');
+            + '<button onclick="fillUp(' + price + ', \'' + name.replace("'", "\\'")  + '\');">Fill up here</button>');
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
