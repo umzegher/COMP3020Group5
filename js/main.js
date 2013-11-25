@@ -74,9 +74,9 @@ function fillUp(price, name) {
 }
 
 function doneFillUp(price, name) {
-    infowindow.setContent(name + '<br/>'
+    infowindow.setContent('<div class="fillUpHere">' + name + '<br/>'
             + price + ' cents/L<br/>'
-            + '<button onclick="fillUp(' + price + ', \'' + name.replace("'", "\\'")  + '\');">Fill up here</button>');
+            + '<button onclick="fillUp(' + price + ', \'' + name.replace("'", "\\'") + '\');">Fill up here</button>');
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
@@ -99,26 +99,6 @@ $('#addVehicleButton').click(function () {
 $('#addMaintenanceButton').click(function () {
     $('#addMaintenanceWindow').show();
     $('#overlay').css('z-index', 3);
-});
-
-$('#doneAddMaintenanceButton').click(function () {
-    $('#addMaintenanceWindow').hide();
-    $('#overlay').css('z-index', 1);
-});
-
-$('#cancelAddMaintenanceButton').click(function () {
-    $('#addMaintenanceWindow').hide();
-    $('#overlay').css('z-index', 1);
-});
-
-$('#doneAddVehicleButton').click(function () {
-    $('#addVehicleWindow').hide();
-    $('#overlay').hide();
-});
-
-$('#cancelAddVehicleButton').click(function () {
-    $('#addVehicleWindow').hide();
-    $('#overlay').hide();
 });
 
 $('#overlay').click(function () {
@@ -242,6 +222,9 @@ var ViewModel = function(vehicles) {
         newMaintenance.startingDate("");
         newMaintenance.kms("");
         newMaintenance.startingKms("");
+
+        $('#addMaintenanceWindow').hide();
+        $('#overlay').css('z-index', 1);
     };
 
     self.addVehicle = function() {
@@ -266,6 +249,9 @@ var ViewModel = function(vehicles) {
         newVehicle.make("");
         newVehicle.model("");
         newVehicle.year(2013);
+
+        $('#addVehicleWindow').hide();
+        $('#overlay').hide();
     };
 };
 

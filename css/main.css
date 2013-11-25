@@ -222,6 +222,12 @@ body {
     color:white;
     padding: 20px;
 }
+#addMaintenanceWindow .label {
+    width: 80px;
+    height: 20px;
+    display: block;
+    float: left;
+}
 
 #addVehicleWindow {
     width: 300px;
@@ -232,6 +238,11 @@ body {
     font-family:Arial, sans-serif;
     color:white;
     padding: 20px;
+}
+#addVehicleWindow .label {
+    width: 80px;
+    display: block;
+    float: left;
 }
 
 #companyLogo{
@@ -386,14 +397,6 @@ body {
     float: right;
     margin-right: 5px;
     cursor: pointer;
-}
-
-#months {
-    width: 40px;
-}
-
-.kms {
-    width: 100px;
 }
 
 #menuButton {

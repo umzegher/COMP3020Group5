@@ -22,7 +22,7 @@
                 </div>
                 <!-- /ko -->
 
-                <div id="addVehicleButton">Add vehicle</div>
+                <input type="button" id="addVehicleButton" value="Add vehicle" />
             </div>
             <hr/>
             <div class="carInfo" data-bind="with: vehicles()[selectedVehicle()]">
@@ -62,11 +62,13 @@
 
         <div id="maintenanceWindow" class="window" style="display: none;">
             <div class="closeButton">X</div>
-            <div id="addMaintenanceButton">Add</div>
+
             <h2 class="maintenanceTitle">Maintenance Recurrences</h2>
             <div class="maintenanceList" data-bind="foreach: vehicles()[selectedVehicle()].maintenance">
                 <div class="maintenanceItem" data-bind="text: $root.getMaintenanceDescription($data)"></div>
             </div>
+
+            <input type="button" id="addMaintenanceButton" value="Add" />
 
             <h2 class="maintenanceTitle">Upcoming Maintenance</h2>
             <div class="maintenanceList" data-bind="foreach: vehicles()[selectedVehicle()].upcomingMaintenance">
@@ -76,26 +78,38 @@
 
         <div id="addMaintenanceWindow" class="window" style="display: none;" data-bind="with: newMaintenance">
             <div class="closeButton">X</div>
-            Name<input id="name" type="text" data-bind="value: name"></input><br/>
-            
-            <input type="radio" name="type" id="duration" value="duration" data-bind="checked: type"></input>
-            <label for="duration">Duration</label><br/>
-            <input type="radio" name="type" id="distance" value="distance" data-bind="checked: type"></input>
-            <label for="distance">Distance</label><br/>
 
-            <div data-bind="visible: type() === 'duration'">
-                Every<input type="number" id="months" data-bind="value: months"></input>months<br/>
-                Starting on<input type="date" data-bind="value: startingDate"></input><br/>
-            </div>
-            <div data-bind="visible: type() === 'distance'">
-                Every<input type="number" class="kms" data-bind="value: kms"></input>km<br/>
-                Starting at<input type="number" class="kms" data-bind="value: startingKms"></input>km<br/>
-            </div>
+            <form data-bind="submit: $root.addMaintenance">
+                <label class="label">Name</label>
+                <input id="name" type="text" data-bind="value: name" required autofocus /><br/>
 
-            <div id="addMaintenanceButtons">
-                <div id="doneAddMaintenanceButton" data-bind="click: $root.addMaintenance">Done</div>
-                <div id="cancelAddMaintenanceButton" data-bind="click: $root.clearAddMaintenance">Cancel</div>
-            </div>
+                <label class="label"></label>
+                <input type="radio" name="type" id="duration" value="duration" data-bind="checked: type" />
+                <label for="duration">Duration</label><br/>
+
+                <label class="label"></label>
+                <input type="radio" name="type" id="distance" value="distance" data-bind="checked: type" />
+                <label for="distance">Distance</label><br/>
+
+                <!-- ko if: type() === 'duration' -->
+                <label class="label">Every</label>
+                <input type="number" id="months" min="1" style="width: 40px; margin: 2px;" data-bind="value: months" required />months<br/>
+                <label class="label">Starting on</label>
+                <input type="date" data-bind="value: startingDate" required /><br/>
+                <!-- /ko -->
+
+                <!-- ko if: type() === 'distance' -->
+                <label class="label">Every</label>
+                <input type="number" class="kms" min="0" style="width: 100px; margin: 2px;" data-bind="value: kms" required />km<br/>
+                <label class="label">Starting at</label>
+                <input type="number" class="kms" min="0" style="width: 100px; margin: 2px;" data-bind="value: startingKms" required />km<br/>
+                <!-- /ko -->
+
+                <div id="addMaintenanceButtons">
+                    <input type="submit" id="doneAddMaintenanceButton" value="Done" />
+                    <input type="button" id="cancelAddMaintenanceButton" value="Cancel" data-bind="click: $root.clearAddMaintenance" />
+                </div>
+            </form>
         </div>
 
         <div id="statisticsWindow" class="window" style="display: none;">
@@ -108,14 +122,20 @@
 
         <div id="addVehicleWindow" class="window" style="display: none;" data-bind="with: newVehicle">
             <div class="closeButton">X</div>
-            Make<input type="text" id="make" data-bind="value: make"></input><br/>
-            Model<input type="text" id="model" data-bind="value: model"></input><br/>
-            Year<input type="number" id="year" data-bind="value: year"></input><br/>
 
-            <div id="addVehicleButtons">
-                <div id="doneAddVehicleButton" data-bind="click: $root.addVehicle">Done</div>
-                <div id="cancelAddVehicleButton" data-bind="click: $root.clearAddVehicle">Cancel</div>
-            </div>
+            <form data-bind="submit: $root.addVehicle">
+                <label class="label">Make</label>
+                <input type="text" id="make" data-bind="value: make" required autofocus /><br/>
+                <label class="label">Model</label>
+                <input type="text" id="model" data-bind="value: model" required /><br/>
+                <label class="label">Year</label>
+                <input type="number" id="year" min="1" style="width: 50px; margin: 2px;" data-bind="value: year" required /><br/>
+
+                <div id="addVehicleButtons">
+                    <input type="submit" id="doneAddVehicleButton" value="Done" />
+                    <input type="button" id="cancelAddVehicleButton" data-bind="click: $root.clearAddVehicle" value="Cancel" />
+                </div>
+            </form>
         </div>
 
 
