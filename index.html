@@ -22,7 +22,9 @@
                 </div>
                 <!-- /ko -->
 
-                <input type="button" id="addVehicleButton" value="Add vehicle" />
+                <button type="button" id="addVehicleButton">
+                    <i class="fa fa-plus"></i> Add vehicle
+                </button>
             </div>
             <hr/>
             <div class="carInfo" data-bind="with: vehicles()[selectedVehicle()]">
@@ -68,7 +70,9 @@
                 <div class="maintenanceItem" data-bind="text: $root.getMaintenanceDescription($data)"></div>
             </div>
 
-            <input type="button" id="addMaintenanceButton" value="Add" />
+            <button type="button" id="addMaintenanceButton">
+                <i class="fa fa-plus"></i> Add
+            </button>
 
             <h2 class="maintenanceTitle">Upcoming Maintenance</h2>
             <div class="maintenanceList" data-bind="foreach: vehicles()[selectedVehicle()].upcomingMaintenance">
@@ -106,8 +110,12 @@
                 <!-- /ko -->
 
                 <div id="addMaintenanceButtons">
-                    <input type="submit" id="doneAddMaintenanceButton" value="Done" />
-                    <input type="button" id="cancelAddMaintenanceButton" value="Cancel" data-bind="click: $root.clearAddMaintenance" />
+                    <button type="submit" id="doneAddMaintenanceButton">
+                        <i class="fa fa-check"></i> Done
+                    </button>
+                    <button type="button" id="cancelAddMaintenanceButton" data-bind="click: $root.clearAddMaintenance">
+                        <i class="fa fa-times"></i> Cancel
+                    </button>
                 </div>
             </form>
         </div>
@@ -134,8 +142,12 @@
                 <input type="file" id="photo" data-bind="value: photo, event: { change: $root.validatePhoto }" /><br/>
 
                 <div id="addVehicleButtons">
-                    <input type="submit" id="doneAddVehicleButton" value="Done" />
-                    <input type="button" id="cancelAddVehicleButton" data-bind="click: $root.clearAddVehicle" value="Cancel" />
+                    <button type="submit" id="doneAddVehicleButton">
+                        <i class="fa fa-check"></i> Done
+                    </button>
+                    <button type="button" id="cancelAddVehicleButton" data-bind="click: $root.clearAddVehicle">
+                        <i class="fa fa-times"></i> Cancel
+                    </button>
                 </div>
             </form>
         </div>
