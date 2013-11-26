@@ -65,13 +65,13 @@
         <div id="maintenanceWindow" class="window" style="display: none;">
             <div class="closeButton">X</div>
 
-            <h2 class="maintenanceTitle">Maintenance Recurrences</h2>
+            <h2 class="maintenanceTitle">Maintenance Reminders</h2>
             <div class="maintenanceList" data-bind="foreach: vehicles()[selectedVehicle()].maintenance">
                 <div class="maintenanceItem" data-bind="text: $root.getMaintenanceDescription($data)"></div>
             </div>
 
             <button type="button" id="addMaintenanceButton">
-                <i class="fa fa-plus"></i> Add
+                <i class="fa fa-plus"></i> Create Reminder
             </button>
 
             <h2 class="maintenanceTitle">Upcoming Maintenance</h2>
@@ -86,26 +86,28 @@
             <form data-bind="submit: $root.addMaintenance">
                 <label class="label">Name</label>
                 <input id="name" type="text" data-bind="value: name" required autofocus /><br/>
+                <br/>
 
-                <label class="label"></label>
+                <label class="label">Repeat</label>
                 <input type="radio" name="type" id="duration" value="duration" data-bind="checked: type" />
-                <label for="duration">Duration</label><br/>
+                <label for="duration">by duration</label><br/>
 
                 <label class="label"></label>
                 <input type="radio" name="type" id="distance" value="distance" data-bind="checked: type" />
-                <label for="distance">Distance</label><br/>
+                <label for="distance">by distance</label><br/>
+                <br/>
 
                 <!-- ko if: type() === 'duration' -->
-                <label class="label">Every</label>
+                <label class="label">Repeat every</label>
                 <input type="number" id="months" min="1" style="width: 40px; margin: 2px;" data-bind="value: months" required />months<br/>
-                <label class="label">Starting on</label>
+                <label class="label">Starts on</label>
                 <input type="date" data-bind="value: startingDate" required /><br/>
                 <!-- /ko -->
 
                 <!-- ko if: type() === 'distance' -->
-                <label class="label">Every</label>
+                <label class="label">Repeat every</label>
                 <input type="number" class="kms" min="0" style="width: 100px; margin: 2px;" data-bind="value: kms" required />km<br/>
-                <label class="label">Starting at</label>
+                <label class="label">Starts at</label>
                 <input type="number" class="kms" min="0" style="width: 100px; margin: 2px;" data-bind="value: startingKms" required />km<br/>
                 <!-- /ko -->
 

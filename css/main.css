@@ -214,16 +214,16 @@ body {
 
 #addMaintenanceWindow {
     width: 300px;
-    height: 200px;
+    height: 220px;
     left: calc(50% - 150px);
-    top: calc(50% - 100px);
+    top: calc(50% - 110px);
     z-index: 4;
     font-family:Arial, sans-serif;
     color:white;
     padding: 20px;
 }
 #addMaintenanceWindow .label {
-    width: 80px;
+    width: 100px;
     height: 20px;
     display: block;
     float: left;

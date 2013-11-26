@@ -43,7 +43,7 @@ function createMarker(place) {
     google.maps.event.addListener(marker, 'click', function() {
         infowindow.setContent('<div class="fillUpHere">' + name + '<br/>'
             + price + ' cents/L<br/>'
-            + '<button onclick="fillUp(' + price + ', \'' + name.replace("'", "\\'") + '\');">Fill up here</button>');
+            + '<button onclick="fillUp(' + price + ', \'' + name.replace("'", "\\'") + '\');">Buy gas here</button>');
         infowindow.open(map, this);
     });
 }
@@ -76,7 +76,7 @@ function fillUp(price, name) {
 function doneFillUp(price, name) {
     infowindow.setContent('<div class="fillUpHere">' + name + '<br/>'
             + price + ' cents/L<br/>'
-            + '<button onclick="fillUp(' + price + ', \'' + name.replace("'", "\\'") + '\');">Fill up here</button>');
+            + '<button onclick="fillUp(' + price + ', \'' + name.replace("'", "\\'") + '\');">Buy gas here</button>');
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
