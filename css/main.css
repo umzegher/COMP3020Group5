@@ -405,6 +405,7 @@ body {
     z-index: 1;
     padding: 10px 15px;
     cursor: pointer;
+    color: #929292;
 }
 
 @media (max-width: 768px) {
