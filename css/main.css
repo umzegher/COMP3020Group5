@@ -40,8 +40,8 @@ body {
     position: absolute;
     width: 600px;
     height: auto;
-    top: calc(50% - 300px);
-    left: calc(50% - 300px);
+    top: calc(50% - 320px);
+    left: calc(50% - 320px);
     background: white;
     border: solid 1px black;
     border-radius: 5px;
@@ -214,9 +214,8 @@ body {
 
 #addMaintenanceWindow {
     width: 300px;
-    height: 220px;
-    left: calc(50% - 150px);
-    top: calc(50% - 110px);
+    left: calc(50% - 170px);
+    top: calc(50% - 130px);
     z-index: 4;
     font-family:Arial, sans-serif;
     color:white;
@@ -231,9 +230,8 @@ body {
 
 #addVehicleWindow {
     width: 330px;
-    height: 160px;
-    left: calc(50% - 165px);
-    top: calc(50% - 80px);
+    left: calc(50% - 185px);
+    top: calc(50% - 100px);
     z-index: 4;
     font-family:Arial, sans-serif;
     color:white;
@@ -438,6 +436,9 @@ body {
         left: 10px;
         right: 10px;
         width: auto;
+        top: 10px;
+        overflow-y: auto;
+        max-height: calc(100% - 40px);
     }
 }
 
