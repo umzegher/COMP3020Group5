@@ -159,7 +159,7 @@ var ViewModel = function(vehicles) {
             make: vehicle.make,
             model: vehicle.model,
             year: vehicle.year,
-            photo: vehicle.photo,
+            photo: "images/" + vehicle.photo,
             maintenance: ko.observableArray(vehicle.maintenance),
             upcomingMaintenance: vehicle.upcomingMaintenance,
             l100kmMonth: vehicle.l100kmMonth,
@@ -178,7 +178,8 @@ var ViewModel = function(vehicles) {
     self.newVehicle = ko.observable({
         make: ko.observable(""),
         model: ko.observable(""),
-        year: ko.observable(2013)
+        year: ko.observable(2013),
+        photo: ko.observable("")
     });
 
     self.setVehicle = function(vehicle) {
@@ -229,19 +230,30 @@ var ViewModel = function(vehicles) {
 
     self.addVehicle = function() {
         var newVehicle = self.newVehicle();
-        var vehicle = {
-            make: newVehicle.make(),
-            model: newVehicle.model(),
-            year: newVehicle.year(),
-            photo: "noimage.jpg",
-            maintenance: ko.observableArray([]),
-            upcomingMaintenance: [],
-            l100kmMonth: 0,
-            l100kmYear: 0
+        var file = $('#photo').get(0).files[0];
+        var createVehicle = function(e) {
+            var vehicle = {
+                make: newVehicle.make(),
+                model: newVehicle.model(),
+                year: newVehicle.year(),
+                photo: e ? e.target.result : "images/noimage.jpg",
+                maintenance: ko.observableArray([]),
+                upcomingMaintenance: [],
+                l100kmMonth: 0,
+                l100kmYear: 0
+            };
+
+            self.vehicles.push(vehicle);
+            self.clearAddVehicle();
         };
 
-        self.vehicles.push(vehicle);
-        self.clearAddVehicle();
+        if (file && file.type.match('image')) {
+            var reader = new FileReader();
+            reader.onload = createVehicle;
+            reader.readAsDataURL(file);
+        } else {
+            createVehicle();
+        }
     };
     self.clearAddVehicle = function() {
         var newVehicle = self.newVehicle();
@@ -249,9 +261,17 @@ var ViewModel = function(vehicles) {
         newVehicle.make("");
         newVehicle.model("");
         newVehicle.year(2013);
+        newVehicle.photo("");
 
         $('#addVehicleWindow').hide();
         $('#overlay').hide();
+    };
+    self.validatePhoto = function(data, event) {
+        var input = event.target;
+        if (input.files[0].type.match('image'))
+            input.setCustomValidity("");
+        else
+            input.setCustomValidity("File must be an image");
     };
 };
 

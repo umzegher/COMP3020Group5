@@ -230,9 +230,9 @@ body {
 }
 
 #addVehicleWindow {
-    width: 300px;
+    width: 330px;
     height: 160px;
-    left: calc(50% - 150px);
+    left: calc(50% - 165px);
     top: calc(50% - 80px);
     z-index: 4;
     font-family:Arial, sans-serif;
