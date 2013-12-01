@@ -81,59 +81,6 @@ function doneFillUp(price, name) {
 
 google.maps.event.addDomListener(window, 'load', initialize);
 
-$('#maintenanceButton').click(function () {
-    $('#maintenanceWindow').show();
-    $('#overlay').show();
-});
-
-$('#statisticsButton').click(function () {
-    $('#statisticsWindow').show();
-    $('#overlay').show();
-});
-
-$('#addVehicleButton').click(function () {
-    $('#addVehicleWindow').show();
-    $('#overlay').show();
-});
-
-$('#addMaintenanceButton').click(function () {
-    $('#addMaintenanceWindow').show();
-    $('#overlay').css('z-index', 3);
-});
-
-$('#overlay').click(function () {
-    $('#maintenanceWindow').hide();
-    $('#addMaintenanceWindow').hide();
-    $('#statisticsWindow').hide();
-    $('#addVehicleWindow').hide();
-    $('#overlay').hide();
-    $('#overlay').css('z-index', 1);
-});
-
-$('#maintenanceWindow .closeButton').click(function () {
-    $('#maintenanceWindow').hide();
-    $('#overlay').hide();
-});
-
-$('#addMaintenanceWindow .closeButton').click(function () {
-    $('#addMaintenanceWindow').hide();
-    $('#overlay').css('z-index', 1);
-});
-
-$('#statisticsWindow .closeButton').click(function () {
-    $('#statisticsWindow').hide();
-    $('#overlay').hide();
-});
-
-$('#addVehicleWindow .closeButton').click(function () {
-    $('#addVehicleWindow').hide();
-    $('#overlay').hide();
-});
-
-$('#menuButton').click(function () {
-    $('#sideBar').toggleClass('hidden');
-});
-
 new Chart(document.getElementById("chart").getContext("2d")).Line({
     labels : ["November","December","January","February","March","April","May","June","July","August","September","October"],
     datasets: [
@@ -182,11 +129,34 @@ var ViewModel = function(vehicles) {
         photo: ko.observable("")
     });
 
+    self.maintenanceWindowVisible = ko.observable(false);
+    self.addMaintenanceWindowVisible = ko.observable(false);
+    self.statisticsWindowVisible = ko.observable(false);
+    self.addVehicleWindowVisible = ko.observable(false);
+    self.anyWindowVisible = function() {
+        return self.maintenanceWindowVisible() || self.addMaintenanceWindowVisible() ||
+                self.statisticsWindowVisible() || self.addVehicleWindowVisible();
+    };
+    self.closeTopWindow = function() {
+        if (self.addMaintenanceWindowVisible()) {
+            self.addMaintenanceWindowVisible(false);
+        } else {
+           self.maintenanceWindowVisible(false);
+           self.statisticsWindowVisible(false);
+           self.addVehicleWindowVisible(false);
+        }
+    };
+
+    self.sideBarVisible = ko.observable(false);
+    self.toggleSideBar = function() {
+        self.sideBarVisible(!self.sideBarVisible());
+    };
+
     self.setVehicle = function(vehicle) {
         return function() {
             self.selectedVehicle(vehicle);
         }
-    }
+    };
     self.getMaintenanceDescription = function(maintenance) {
         var description = maintenance.name + " every ";
 
@@ -196,7 +166,7 @@ var ViewModel = function(vehicles) {
             description += maintenance.kms + " km";
 
         return description;
-    }
+    };
     self.addMaintenance = function() {
         var newMaintenance = self.newMaintenance();
         var maintenance = {
@@ -224,8 +194,7 @@ var ViewModel = function(vehicles) {
         newMaintenance.kms("");
         newMaintenance.startingKms("");
 
-        $('#addMaintenanceWindow').hide();
-        $('#overlay').css('z-index', 1);
+        self.addMaintenanceWindowVisible(false);
     };
 
     self.addVehicle = function() {
@@ -263,8 +232,7 @@ var ViewModel = function(vehicles) {
         newVehicle.year(2013);
         newVehicle.photo("");
 
-        $('#addVehicleWindow').hide();
-        $('#overlay').hide();
+        self.addVehicleWindowVisible(false);
     };
     self.validatePhoto = function(data, event) {
         var input = event.target;

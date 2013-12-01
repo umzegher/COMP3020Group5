@@ -9,20 +9,28 @@
 
         <link rel="stylesheet" href="css/main.css">
         <link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZUAd3IJtr5Ym3vv3zpEjM2175st_5mNo&sensor=true&libraries=places"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/2.3.0/knockout-min.js"></script>
+        <script src="js/Chart.js"></script>
+
+        <script src="js/defaults.js"></script>
+        <script src="js/main.js"></script>
     </head>
     <body>
-        <div id="sideBar" class="hidden">
+        <div id="sideBar" data-bind="css: {hidden: !sideBarVisible()}">
             <div id="companyLogo">
                 <span>Fuel Economy </span><i class="fa fa-dashboard fa-2x"></i><span> Company</span>
             </div>
             <div id="carPicker">
                 <!-- ko foreach: vehicles -->
                 <div class="carPickerItem" data-bind="css: {active: $root.selectedVehicle()==$index()}, click: $root.setVehicle($index())">
-                    <img data-bind="attr: {src: photo}">
+                    <img data-bind="attr: {src: photo}" />
                 </div>
                 <!-- /ko -->
 
-                <button type="button" id="addVehicleButton">
+                <button type="button" id="addVehicleButton" data-bind="click: function() {addVehicleWindowVisible(true)}">
                     <i class="fa fa-plus"></i> Add vehicle
                 </button>
             </div>
@@ -48,29 +56,34 @@
                 </ul>
             </div>
         </div>
-        <i id="menuButton" class="fa fa-bars fa-2x"></i>
+
+        <i id="menuButton" class="fa fa-bars fa-2x" data-bind="click: toggleSideBar"></i>
+
         <div id="mapCanvas"></div>
+
         <div id="mapButtons">
-            <div id="maintenanceButton" class="mapButton" style="float:left">
+            <div class="mapButton" data-bind="click: function() {maintenanceWindowVisible(true)}" style="float: left">
                 <i class="fa fa-wrench fa-3x"></i>
                 <span class="buttonText">Maintenance</span>
             </div>
-            <div id="statisticsButton" class="mapButton" style="float:right">
+            <div class="mapButton" data-bind="click: function() {statisticsWindowVisible(true)}" style="float: right">
                 <i class="fa fa-bar-chart-o fa-3x"></i>
                 <span class="buttonText">Statistics</span>
             </div>
         </div>
-        <div id="overlay" style="display:none"></div>
 
-        <div id="maintenanceWindow" class="window" style="display: none;">
-            <div class="closeButton">X</div>
+        <div id="overlay" data-bind="visible: anyWindowVisible(), style:
+            {zIndex: addMaintenanceWindowVisible() ? 3 : 1}, click: closeTopWindow"></div>
+
+        <div id="maintenanceWindow" class="window" data-bind="visible: maintenanceWindowVisible">
+            <div class="closeButton" data-bind="click: function() {maintenanceWindowVisible(false)}">X</div>
 
             <h2 class="maintenanceTitle">Maintenance Reminders</h2>
             <div class="maintenanceList" data-bind="foreach: vehicles()[selectedVehicle()].maintenance">
                 <div class="maintenanceItem" data-bind="text: $root.getMaintenanceDescription($data)"></div>
             </div>
 
-            <button type="button" id="addMaintenanceButton">
+            <button type="button" id="addMaintenanceButton" data-bind="click: function() {addMaintenanceWindowVisible(true)}">
                 <i class="fa fa-plus"></i> Create Reminder
             </button>
 
@@ -80,10 +93,10 @@
             </div>
         </div>
 
-        <div id="addMaintenanceWindow" class="window" style="display: none;" data-bind="with: newMaintenance">
-            <div class="closeButton">X</div>
+        <div id="addMaintenanceWindow" class="window" data-bind="visible: addMaintenanceWindowVisible">
+            <div class="closeButton" data-bind="click: function() {addMaintenanceWindowVisible(false)}">X</div>
 
-            <form data-bind="submit: $root.addMaintenance">
+            <form data-bind="with: newMaintenance, submit: $root.addMaintenance">
                 <label class="label">Name</label>
                 <input id="name" type="text" data-bind="value: name" required autofocus /><br/>
                 <br/>
@@ -122,18 +135,18 @@
             </form>
         </div>
 
-        <div id="statisticsWindow" class="window" style="display: none;">
-            <div class="closeButton">X</div>
+        <div id="statisticsWindow" class="window" data-bind="visible: statisticsWindowVisible">
+            <div class="closeButton" data-bind="click: function() {statisticsWindowVisible(false)}">X</div>
             <h1 class="center">Statistics</h1>
             <div class="chartYLabel">L/100km</div>
             <canvas id="chart" height="450" width="600"></canvas>
             <div  class="center">Month</div>
         </div>
 
-        <div id="addVehicleWindow" class="window" style="display: none;" data-bind="with: newVehicle">
-            <div class="closeButton">X</div>
+        <div id="addVehicleWindow" class="window" data-bind="visible: addVehicleWindowVisible">
+            <div class="closeButton" data-bind="click: function() {addVehicleWindowVisible(false)}">X</div>
 
-            <form data-bind="submit: $root.addVehicle">
+            <form data-bind="with: newVehicle, submit: $root.addVehicle">
                 <label class="label">Make</label>
                 <input type="text" id="make" data-bind="value: make" required autofocus /><br/>
                 <label class="label">Model</label>
@@ -153,16 +166,5 @@
                 </div>
             </form>
         </div>
-
-
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.js"></script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZUAd3IJtr5Ym3vv3zpEjM2175st_5mNo&sensor=true&libraries=places"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/2.3.0/knockout-min.js"></script>
-
-        <!--http://www.chartjs.org/-->
-        <script src="js/Chart.js"></script>
-
-        <script src="js/defaults.js"></script>
-        <script src="js/main.js"></script>
     </body>
 </html>
