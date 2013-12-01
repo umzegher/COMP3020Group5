@@ -25,7 +25,7 @@
             </div>
             <div id="carPicker">
                 <!-- ko foreach: vehicles -->
-                <div class="carPickerItem" data-bind="css: {active: $root.selectedVehicle()==$index()}, click: $root.setVehicle($index())">
+                <div class="carPickerItem" data-bind="css: {active: $root.selectedVehicle()===$data}, click: $root.setVehicle($data)">
                     <img data-bind="attr: {src: photo}" />
                 </div>
                 <!-- /ko -->
@@ -35,7 +35,7 @@
                 </button>
             </div>
             <hr/>
-            <div class="carInfo" data-bind="with: vehicles()[selectedVehicle()]">
+            <div class="carInfo" data-bind="with: selectedVehicle">
                 <div id="carModel" data-bind="text: year+' '+make+' '+model"></div>
                 <div class="fuelEconomy" style="float: left;">
                     <div class="digitalClockFont" data-bind="text: l100kmMonth"></div>
@@ -62,13 +62,17 @@
         <div id="mapCanvas"></div>
 
         <div id="mapButtons">
-            <div class="mapButton" data-bind="click: function() {maintenanceWindowVisible(true)}" style="float: left">
+            <div class="mapButton" data-bind="click: function() {maintenanceWindowVisible(true)}">
                 <i class="fa fa-wrench fa-3x"></i>
-                <span class="buttonText">Maintenance</span>
+                <div class="buttonText">Maintenance</div>
             </div>
-            <div class="mapButton" data-bind="click: function() {statisticsWindowVisible(true)}" style="float: right">
+            <div class="mapButton" data-bind="click: function() {historyWindowVisible(true)}">
+                <i class="fa fa-dollar fa-3x"></i>
+                <div class="buttonText">History</div>
+            </div>
+            <div class="mapButton" data-bind="click: function() {statisticsWindowVisible(true)}">
                 <i class="fa fa-bar-chart-o fa-3x"></i>
-                <span class="buttonText">Statistics</span>
+                <div class="buttonText">Statistics</div>
             </div>
         </div>
 
@@ -79,8 +83,8 @@
             <div class="closeButton" data-bind="click: function() {maintenanceWindowVisible(false)}">X</div>
 
             <h2 class="maintenanceTitle">Maintenance Reminders</h2>
-            <div class="maintenanceList" data-bind="foreach: vehicles()[selectedVehicle()].maintenance">
-                <div class="maintenanceItem" data-bind="text: $root.getMaintenanceDescription($data)"></div>
+            <div class="list" data-bind="foreach: selectedVehicle().maintenance">
+                <div class="listItem" data-bind="text: $root.getMaintenanceDescription($data)"></div>
             </div>
 
             <button type="button" id="addMaintenanceButton" data-bind="click: function() {addMaintenanceWindowVisible(true)}">
@@ -88,8 +92,8 @@
             </button>
 
             <h2 class="maintenanceTitle">Upcoming Maintenance</h2>
-            <div class="maintenanceList" data-bind="foreach: vehicles()[selectedVehicle()].upcomingMaintenance">
-                <div class="maintenanceItem" data-bind="text: $data"></div>
+            <div class="list" data-bind="foreach: selectedVehicle().upcomingMaintenance">
+                <div class="listItem" data-bind="text: $data"></div>
             </div>
         </div>
 
@@ -135,8 +139,18 @@
             </form>
         </div>
 
+        <div id="HistoryWindow" class="window" data-bind="visible: historyWindowVisible">
+            <div class="closeButton" data-bind="click: function() {historyWindowVisible(false)}">X</div>
+
+            <h2 class="historyTitle">Fill up history</h2>
+            <div id="historyList" class="list" data-bind="foreach: selectedVehicle().fillUps">
+                <div class="listItem" data-bind="text: $root.getHistoryDescription($data)"></div>
+            </div>
+        </div>
+
         <div id="statisticsWindow" class="window" data-bind="visible: statisticsWindowVisible">
             <div class="closeButton" data-bind="click: function() {statisticsWindowVisible(false)}">X</div>
+
             <h1 class="center">Statistics</h1>
             <div class="chartYLabel">L/100km</div>
             <canvas id="chart" height="450" width="600"></canvas>

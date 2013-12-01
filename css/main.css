@@ -17,18 +17,20 @@ body {
     right: 20px;
     position: absolute;
     top: 20px;
-    width: 200px;
+    width: 300px;
 }
 .mapButton {
+    float: left;
     position: relative;
-    width: 47%;
+    width: 31%;
     text-align: center;
     padding: 10px 0px;
     cursor: pointer;
     border: 1px black solid;
     background-color: #32425C;
-    color:white;
-    border-radius: 10px
+    color: white;
+    border-radius: 10px;
+    margin-right: 1%;
 }
 
 .mapButton:hover{
@@ -136,7 +138,6 @@ body {
 }
 
 .fillUpHere{
-
     padding:10px;
 }
 
@@ -177,13 +178,17 @@ body {
     font-family: 'DigitalClock';
     font-size: 4em;
 }
-.maintenanceList {
+.list {
     height: 170px;
     overflow-y: auto;
     border: 1px black solid;
     background-color: white;
     border-radius: 10px;
     font-family:Arial, sans-serif;
+}
+
+#historyList {
+    height: 300px;
 }
 
 #addMaintenanceButton {
@@ -207,6 +212,12 @@ body {
 }
 
 .maintenanceTitle{
+    text-align: center;
+    color:white;
+    font-family:Arial, sans-serif;
+}
+
+.historyTitle{
     text-align: center;
     color:white;
     font-family:Arial, sans-serif;
@@ -247,10 +258,6 @@ body {
     padding-top: 5px;
     text-align: center;
     color:orange;
-}
-
-.stationName{
-    font-family:Arial, sans-serif;
 }
 
 #doneAddMaintenanceButton{
@@ -343,7 +350,7 @@ body {
     color:#282828;
 }
 
-.fillUp{
+#fillUp{
     padding:20px;
 }
 
@@ -377,10 +384,10 @@ body {
     color:#282828;
 }
 
-.maintenanceItem{
+.listItem{
     padding: 10px;
 }
-.maintenanceItem:nth-child(odd) {
+.listItem:nth-child(odd) {
     background: lightgray;
 }
 
@@ -428,7 +435,7 @@ body {
     }
 
     #mapButtons {
-        width: 120px;
+        width: 180px;
     }
 
     .window {
