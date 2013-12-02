@@ -80,27 +80,10 @@ $(function() {
         return (Math.random() * (max - min) + min).toFixed(1);
     }
 
-    new Chart(document.getElementById("chart").getContext("2d")).Line({
-        labels : ["November","December","January","February","March","April","May","June","July","August","September","October"],
-        datasets: [
-            {
-                fillColor: "rgba(151,187,205,0.5)",
-                strokeColor: "rgba(151,187,205,1)",
-                pointColor: "rgba(151,187,205,1)",
-                pointStrokeColor: "#fff",
-                data: [14.5,14.8,14.7,14.5,14.9,15,14.8,15.5,15.8,16,16.3,17.4]
-            }
-        ]
-    }, {
-        scaleFontColor: "#fff",
-        scaleLineColor: "rgba(255,255,255,.2)",
-        scaleGridLineColor: "rgba(255,255,255,.1)"
-    });
-
-    var ViewModel = function(vehicles) {
+    var ViewModel = function(defaults) {
         var self = this;
 
-        self.vehicles = ko.observableArray(ko.utils.arrayMap(vehicles, function(vehicle) {
+        self.vehicles = ko.observableArray(ko.utils.arrayMap(defaults.vehicles, function(vehicle) {
             return {
                 make: vehicle.make,
                 model: vehicle.model,
@@ -159,6 +142,31 @@ $(function() {
         self.amount = ko.observable(40);
         self.odometer = ko.observable();
         self.fillUpFormVisible = ko.observable();
+
+        var chart = new Chart(document.getElementById("chart").getContext("2d"))
+        self.statsInterval = ko.observable();
+        self.statsInterval.subscribe(function(newInterval) {
+            chart.Line({
+                labels : defaults.statistics[newInterval].labels,
+                datasets: [
+                    {
+                        fillColor: "rgba(151,187,205,0.5)",
+                        strokeColor: "rgba(151,187,205,1)",
+                        pointColor: "rgba(151,187,205,1)",
+                        pointStrokeColor: "#fff",
+                        data: defaults.statistics[newInterval].data
+                    }
+                ]
+            }, {
+                scaleOverride: true,
+                scaleSteps: 16,
+                scaleStepWidth: 0.25,
+                scaleStartValue: 14,
+                scaleFontColor: "#fff",
+                scaleLineColor: "rgba(255,255,255,.2)",
+                scaleGridLineColor: "rgba(255,255,255,.1)"
+            });
+        });
 
         self.setVehicle = function(vehicle) {
             return function() {

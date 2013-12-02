@@ -152,6 +152,16 @@
             <div class="closeButton" data-bind="click: function() {statisticsWindowVisible(false)}">X</div>
 
             <h1 class="center">Statistics</h1>
+
+            <div class="center">
+                Interval:
+                <select data-bind="value: statsInterval">
+                    <option value="year">Year</option>
+                    <option value="6Months">6 months</option>
+                    <option value="month">Month</option>
+                </select>
+            </div>
+
             <div class="chartYLabel">L/100km</div>
             <canvas id="chart" height="450" width="600"></canvas>
             <div  class="center">Month</div>
