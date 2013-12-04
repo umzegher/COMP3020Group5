@@ -85,10 +85,10 @@ $(function() {
 
         self.vehicles = ko.observableArray(ko.utils.arrayMap(defaults.vehicles, function(vehicle) {
             return {
-                make: vehicle.make,
-                model: vehicle.model,
-                year: vehicle.year,
-                photo: "images/" + vehicle.photo,
+                make: ko.observable(vehicle.make),
+                model: ko.observable(vehicle.model),
+                year: ko.observable(vehicle.year),
+                photo: ko.observable("images/" + vehicle.photo),
                 maintenance: ko.observableArray(vehicle.maintenance),
                 upcomingMaintenance: vehicle.upcomingMaintenance,
                 l100kmMonth: vehicle.l100kmMonth,
@@ -105,12 +105,7 @@ $(function() {
             kms: ko.observable(""),
             startingKms: ko.observable("")
         });
-        self.newVehicle = ko.observable({
-            make: ko.observable(""),
-            model: ko.observable(""),
-            year: ko.observable(2013),
-            photo: ko.observable("")
-        });
+        self.newVehicle = ko.observable();
 
         self.maintenanceWindowVisible = ko.observable(false);
         self.addMaintenanceWindowVisible = ko.observable(false);
@@ -227,19 +222,13 @@ $(function() {
             var newVehicle = self.newVehicle();
             var file = $('#photo').get(0).files[0];
             var createVehicle = function(e) {
-                var vehicle = {
-                    make: newVehicle.make(),
-                    model: newVehicle.model(),
-                    year: newVehicle.year(),
-                    photo: e ? e.target.result : "images/noimage.jpg",
-                    maintenance: ko.observableArray([]),
-                    upcomingMaintenance: [],
-                    l100kmMonth: 0,
-                    l100kmYear: 0,
-                    fillUps: ko.observableArray([])
-                };
+                if (e) // if a photo is selected
+                    newVehicle.photo(e.target.result);
 
-                self.vehicles.push(vehicle);
+                if (newVehicle.new) {
+                    newVehicle.new = undefined;
+                    self.vehicles.push(newVehicle);
+                }
                 self.clearAddVehicle();
             };
 
@@ -252,15 +241,23 @@ $(function() {
             }
         };
         self.clearAddVehicle = function() {
-            var newVehicle = self.newVehicle();
-
-            newVehicle.make("");
-            newVehicle.model("");
-            newVehicle.year(2013);
-            newVehicle.photo("");
+            self.newVehicle({
+                make: ko.observable(""),
+                model: ko.observable(""),
+                year: ko.observable(2013),
+                photo: ko.observable("images/noimage.jpg"),
+                maintenance: ko.observableArray([]),
+                upcomingMaintenance: [],
+                l100kmMonth: 0,
+                l100kmYear: 0,
+                fillUps: ko.observableArray([]),
+                new: true
+            });
 
             self.addVehicleWindowVisible(false);
         };
+        self.clearAddVehicle();
+
         self.validatePhoto = function(data, event) {
             var input = event.target;
             if (input.files[0].type.match('image'))
@@ -268,6 +265,13 @@ $(function() {
             else
                 input.setCustomValidity("File must be an image");
         };
+        self.editVehicle = function(vehicle) {
+            return function() {
+                self.newVehicle(vehicle);
+                self.addVehicleWindowVisible(true);
+            };
+        };
+
         self.fillUp = function() {
             self.selectedVehicle().fillUps.push({
                 amount: self.amount(),

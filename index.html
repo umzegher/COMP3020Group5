@@ -26,7 +26,12 @@
             <div id="carPicker">
                 <!-- ko foreach: vehicles -->
                 <div class="carPickerItem" data-bind="css: {active: $root.selectedVehicle()===$data}, click: $root.setVehicle($data)">
-                    <img data-bind="attr: {src: photo}" />
+                    <div class="carPickerImg">
+                        <img data-bind="attr: {src: photo}" />
+                    </div>
+                    <button type="button" class="editVehicleButton" data-bind="click: $root.editVehicle($data)">
+                        <i class="fa fa-pencil"></i>
+                    </button>
                 </div>
                 <!-- /ko -->
 
@@ -36,7 +41,7 @@
             </div>
             <hr/>
             <div class="carInfo" data-bind="with: selectedVehicle">
-                <div id="carModel" data-bind="text: year+' '+make+' '+model"></div>
+                <div id="carModel" data-bind="text: year()+' '+make()+' '+model()"></div>
                 <div class="fuelEconomy" style="float: left;">
                     <div class="digitalClockFont" data-bind="text: l100kmMonth"></div>
                     <span class="units">L/100km last month</span>
@@ -178,7 +183,7 @@
                 <label class="label">Year</label>
                 <input type="number" id="year" min="1" style="width: 50px; margin: 2px;" data-bind="value: year" required /><br/>
                 <label class="label">Image</label>
-                <input type="file" id="photo" data-bind="value: photo, event: { change: $root.validatePhoto }" /><br/>
+                <input type="file" id="photo" data-bind="event: { change: $root.validatePhoto }" /><br/>
 
                 <div id="addVehicleButtons">
                     <button type="submit" id="doneAddVehicleButton">
