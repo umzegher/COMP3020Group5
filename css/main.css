@@ -324,6 +324,21 @@ body {
     margin: 5px;
 }
 
+#deleteVehicleButton{
+    border-radius: 5px 5px 5px 5px;
+    background-color: rgb(58,153,241);
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 35px;
+    text-align: center;
+    width: 100px;
+    color:white;
+    text-decoration: none;
+    cursor: pointer;
+    float: left;
+    margin: 5px;
+}
+
 #addVehicleButtons{
     padding-top: 15px;
     text-align: center;
@@ -346,6 +361,11 @@ body {
 
 #doneAddVehicleButton:hover{
     background-color: #A7D7E5;
+    color:#282828;
+}
+
+#deleteVehicleButton:hover{
+    background-color: red;
     color:#282828;
 }
 

@@ -192,6 +192,9 @@
                     <button type="button" id="cancelAddVehicleButton" data-bind="click: $root.clearAddVehicle">
                         <i class="fa fa-times"></i> Cancel
                     </button>
+                    <button type="button" id="deleteVehicleButton" data-bind="visible: added, click: $root.deleteVehicle($data)">
+                        <i class="fa fa-trash-o"></i> Delete
+                    </button>
                 </div>
             </form>
         </div>

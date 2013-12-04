@@ -93,7 +93,8 @@ $(function() {
                 upcomingMaintenance: vehicle.upcomingMaintenance,
                 l100kmMonth: vehicle.l100kmMonth,
                 l100kmYear: vehicle.l100kmYear,
-                fillUps: ko.observableArray(vehicle.fillUps)
+                fillUps: ko.observableArray(vehicle.fillUps),
+                added: true
             };
         }));
         self.selectedVehicle = ko.observable();
@@ -225,8 +226,8 @@ $(function() {
                 if (e) // if a photo is selected
                     newVehicle.photo(e.target.result);
 
-                if (newVehicle.new) {
-                    newVehicle.new = undefined;
+                if (!newVehicle.added) {
+                    newVehicle.added = true;
                     self.vehicles.push(newVehicle);
                 }
                 self.clearAddVehicle();
@@ -251,12 +252,19 @@ $(function() {
                 l100kmMonth: 0,
                 l100kmYear: 0,
                 fillUps: ko.observableArray([]),
-                new: true
+                added: false
             });
 
             self.addVehicleWindowVisible(false);
         };
         self.clearAddVehicle();
+        self.deleteVehicle = function(vehicle) {
+            return function() {
+                var index = self.vehicles().indexOf(vehicle);
+                self.vehicles.splice(index, 1);
+                self.clearAddVehicle();
+            };
+        };
 
         self.validatePhoto = function(data, event) {
             var input = event.target;
