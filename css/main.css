@@ -9,6 +9,12 @@ body {
     overflow: hidden;
 }
 
+.column {
+    width: 45%;
+    float: left;
+    margin: 2.5%;
+}
+
 #mapCanvas {
     height: 100%;
 }
@@ -42,7 +48,7 @@ body {
     position: absolute;
     width: 600px;
     height: auto;
-    top: calc(50% - 320px);
+    top: calc(50% - 267px);
     left: calc(50% - 320px);
     background: white;
     border: solid 1px black;
@@ -183,7 +189,7 @@ body {
     font-size: 4em;
 }
 .list {
-    height: 170px;
+    height: 300px;
     overflow-y: auto;
     border: 1px black solid;
     background-color: white;
@@ -447,9 +453,13 @@ body {
     font-family: sans-serif;
     font-size: 2em;
     color: white;
-    float: right;
+    text-align: right;
     margin-right: 5px;
     cursor: pointer;
+}
+
+.closeButtonWrapper {
+    height: 0;
 }
 
 #menuButton {
@@ -462,6 +472,10 @@ body {
 }
 
 @media (max-width: 768px) {
+    .column {
+        width: 95%;
+    }
+
     #menuButton {
         display: inline-block;
     }
@@ -494,6 +508,10 @@ body {
         top: 10px;
         overflow-y: auto;
         max-height: calc(100% - 40px);
+    }
+
+    .list {
+        height: 150px;
     }
 }
 
