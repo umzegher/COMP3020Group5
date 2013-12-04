@@ -290,9 +290,15 @@ $(function() {
 
             self.clearFillUp();
         };
-        self.clearFillUp = function () {
+        self.clearFillUp = function() {
             self.amount(40);
             self.fillUpFormVisible(false);
+        };
+        self.deleteFillUp = function(fillUp) {
+            return function() {
+                var index = self.selectedVehicle().fillUps().indexOf(fillUp);
+                self.selectedVehicle().fillUps.splice(index, 1);
+            };
         };
     };
 

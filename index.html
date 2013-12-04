@@ -149,7 +149,12 @@
 
             <h2 class="historyTitle">Fill up history</h2>
             <div id="historyList" class="list" data-bind="foreach: selectedVehicle().fillUps">
-                <div class="listItem" data-bind="text: $root.getHistoryDescription($data)"></div>
+                <div class="listItem">
+                    <button type="button" class="deleteFillUpButton" data-bind="click: $root.deleteFillUp($data)">
+                        <i class="fa fa-trash-o"></i>
+                    </button>
+                    <span data-bind="text: $root.getHistoryDescription($data)"></span>
+                </div>
             </div>
         </div>
 

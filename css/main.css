@@ -417,6 +417,21 @@ body {
     color:#282828;
 }
 
+.deleteFillUpButton{
+    border-radius: 5px 5px 5px 5px;
+    background-color: rgb(58,153,241);
+    font-size: 16px;
+    color:white;
+    cursor: pointer;
+    margin: 0;
+    float: right;
+    margin-right: 10px;
+}
+.deleteFillUpButton:hover{
+    background-color: #A7D7E5;
+    color:#282828;
+}
+
 .listItem{
     padding: 10px;
 }
