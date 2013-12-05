@@ -44,7 +44,7 @@ $(function() {
             var marker = new google.maps.Marker({
                 map: map,
                 position: place.geometry.location,
-                icon: 'http://maps.google.com/mapfiles/ms/icons/' + getColorFromPrice(price) + '-dot.png'
+                icon: getIconFromPrice(price)
             });
 
             google.maps.event.addListener(marker, 'click', function() {
@@ -63,15 +63,26 @@ $(function() {
                 }
             }
         });
+
+        var legend = document.getElementById('legend');
+        $.each(defaults.icons, function(i, icon) {
+            var div = document.createElement('div');
+            div.innerHTML = '<img src="' + icon.src + '"> ' + icon.name;
+            legend.appendChild(div);
+        });
+
+        map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend);
     });
 
-    function getColorFromPrice(price) {
-        if (price > 112)
-            return 'red';
-        else if (price > 108)
-            return 'yellow';
-        else
-            return 'green';
+    function getIconFromPrice(price) {
+        var found = "";
+        $.each(defaults.icons, function(i, icon) {
+            if (icon.maxPrice == undefined || icon.maxPrice >= price) {
+                found = icon.src;
+                return false;
+            }
+        });
+        return found;
     }
 
     function getRandomPrice() {

@@ -44,6 +44,22 @@ body {
     color:#282828;
 }
 
+#legend {
+    font-family: Arial, sans-serif;
+    background: #A7D7E5;
+    padding: 10px;
+    margin: 10px;
+    border: 1px black solid;
+    border-radius: 5px;
+}
+#legend h2 {
+    margin: 0;
+    text-align: center;
+}
+#legend img {
+    vertical-align: middle;
+}
+
 .window {
     position: absolute;
     width: 600px;
